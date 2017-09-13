@@ -4,6 +4,15 @@ import java.util.Random;
 public class TileBag {
 	ArrayList<Tile> TileSet;
 	
+	private static final TileBag instance;
+	static{
+		instance = new TileBag();
+	}
+	
+	public static TileBag getInstance(){
+		return instance;
+	}
+	
 	TileBag(){
 		TileSet = new ArrayList<Tile>();
 		AddMultipleTiles('A',1,9);

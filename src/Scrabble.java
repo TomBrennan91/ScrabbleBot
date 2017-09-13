@@ -4,9 +4,10 @@ public class Scrabble {
 
 		System.out.println("begin scrabble");
 		TileBag bag = new TileBag();
-		while (!bag.isEmpty()){
-			System.out.println(bag.takeOutTile());
-		}
+		
+		Player user = new Player("josef", false);
+		Player bot = new Player("ScrabbleBot", true);
+		
 		
 	}
 }

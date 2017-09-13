@@ -12,7 +12,9 @@ public class Player {
 		this.isAI = isAI;
 		this.letterRack = new LetterRack();
 		this.Score = 0;
-		System.out.println("Player: " + name + "has entered the game");
+		System.out.println("Player: '" + name + "' has entered the game");
+		System.out.println(name + " has the Tiles:");
+		this.letterRack.readTiles();
 	}
 	
 }

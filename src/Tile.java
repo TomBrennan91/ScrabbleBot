@@ -1,10 +1,20 @@
+import java.awt.Color;
+
+import javax.swing.JButton;
 
 public class Tile {
+	char letter;
+	int points;
+	JButton icon;
+	
+	
 	public Tile(char letter, int points) {
 		super();
 		this.letter = letter;
 		this.points = points;
 		//build Tile Icon
+		icon = new JButton("" + letter);
+		icon.setBackground(Color.yellow);
 	}
 	
 	@Override
@@ -12,7 +22,6 @@ public class Tile {
 		return "Tile [letter=" + letter + ", points=" + points + "]";
 	}
 	
-	char letter;
-	int points;
+
 	
 }

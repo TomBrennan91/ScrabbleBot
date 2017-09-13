@@ -8,6 +8,13 @@ public class LetterRack implements Constants{
 		refill();
 	}
 	
+	public void readTiles(){
+		
+		for (Tile tile : tiles ){
+			System.out.println(tile.toString());
+		}
+	}
+	
 	public void refill(){
 		while (tiles.size() < TILES_IN_RACK){
 			tiles.add(TileBag.getInstance().takeOutTile());

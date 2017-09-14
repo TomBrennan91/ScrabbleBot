@@ -2,16 +2,12 @@ import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Scrabble {
 	public static void main(String[] args) {
 		
 		System.out.println("begin scrabble");
-		TileBag bag = new TileBag();
-		
-
-		
+		new TileBag();
 		buildUI();
 		
 	}
@@ -31,8 +27,9 @@ public class Scrabble {
 		
 		f.add(board.boardCanvas, BorderLayout.CENTER);
 		f.add(user.letterRack.display, BorderLayout.SOUTH);
+		f.add(bot.letterRack.display, BorderLayout.NORTH);
 		
-		f.setSize(800,800);  
+		f.setSize(800,900);  
         f.setVisible(true);
         f.setLocation(100, 100);
 		f.requestFocus();

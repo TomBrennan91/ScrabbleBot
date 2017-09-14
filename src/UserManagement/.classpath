@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/Learning Python/aopalliance-repackaged-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/hk2-api-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/hk2-locator-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/hk2-utils-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/javassist-3.20.0-GA.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/javax.annotation-api-1.2.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/javax.inject-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/javax.ws.rs-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jaxb-api-2.2.7.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jersey-client.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jersey-common.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jersey-container-servlet-core.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jersey-container-servlet.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jersey-guava-2.25.1.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jersey-media-jaxb.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/jersey-server.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/org.osgi.core-4.2.0.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/osgi-resource-locator-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/persistence-api-1.0.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/rt.jar"/>
+	<classpathentry kind="lib" path="/Learning Python/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/apache-tomcat-8.5.20-windows-x64.zip"/>
+	<classpathentry kind="lib" path="D:/Downloads/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/poi-3.16.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/poi-examples-3.16.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/poi-excelant-3.16.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/poi-ooxml-3.16.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/poi-ooxml-schemas-3.16.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/poi-scratchpad-3.16.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/ooxml-lib/curvesapi-1.04.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/ooxml-lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/lib/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="D:/Downloads/poi-3.16/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

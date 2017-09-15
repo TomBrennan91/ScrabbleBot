@@ -52,7 +52,5 @@ public class Board implements Constants{
 			}
 		}
 	}
-	
-	
-	
+
 }

@@ -2,6 +2,14 @@
 //in this primitive definition, it must be possible to add a word while only adding a single word to an anchor
 
 public class Anchor {
+	
+	int row;
+	int col;
+	Tile anchorTile;
+	int prefixCap;
+	int postfixCap;
+	boolean across;
+	
 	public Anchor(int row, int col, Tile anchorTile, int prefixCap, int postfixCap, boolean across) {
 		super();
 		this.row = row;
@@ -11,11 +19,12 @@ public class Anchor {
 		this.postfixCap = postfixCap;
 		this.across = across;
 	}
-	int row;
-	int col;
-	Tile anchorTile;
-	int prefixCap;
-	int postfixCap;
-	boolean across;
+	
+	@Override
+	public String toString() {
+		return "Anchor [row=" + row + ", col=" + col + ", anchorTile=" + anchorTile + ", prefixCap=" + prefixCap
+				+ ", postfixCap=" + postfixCap + ", across=" + across + "]";
+	}
+
 	
 }

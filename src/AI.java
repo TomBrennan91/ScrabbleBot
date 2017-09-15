@@ -44,4 +44,17 @@ public class AI {
 		}
 	}
 	
+	ArrayList<Anchor> findAnchors(){
+		ArrayList<Anchor> anchors = new ArrayList<Anchor>();
+		Tile[][] tileArr =  Board.getInstance().tileArr;
+		for (int row = 0 ; row < tileArr.length ; row ++){
+			for (int col = 0 ; col < tileArr[0].length ; col ++){
+				if (tileArr[row][col].letter != ' '){
+					anchors.add(new Anchor(row, col, tileArr[row][col], 0, 0, false));
+				}
+			}
+		}
+		return anchors;
+	}
+	
 }

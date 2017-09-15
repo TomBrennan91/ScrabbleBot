@@ -7,7 +7,7 @@ public class Dictionary {
 	static WordTrie trie;
 	
 	public Dictionary() {
-		ReadWordList("wordlist.txt");
+		ReadWordList("longwordlist.txt");
 	}
 	
 	public void ReadWordList(String fileName){
@@ -62,7 +62,7 @@ class WordTrie {
     
     public Boolean searchWord(String word) {
         if (word == null|| word == "") return false;
-        word = word.toLowerCase();
+        word = word.toUpperCase();
         TrieNode cur = root;
         for (char c: word.toCharArray()){
             HashMap<Character, TrieNode> child = cur.children;
@@ -81,7 +81,7 @@ class WordTrie {
     
     public Boolean searchPrefix(String word) {
         if (word == null) return false;
-        word = word.toLowerCase();
+        word = word.toUpperCase();
         TrieNode cur = root;
         for (char c: word.toCharArray()){
             HashMap<Character, TrieNode> child = cur.children;

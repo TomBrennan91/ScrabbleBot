@@ -136,30 +136,49 @@ public class AI implements Constants {
 						int endCol = col;
 						
 						//check how far left the word can go without collisions
-						if (col > 1 && tileArr[row][col - 1].letter == ' '){
+						if (col > 0 && tileArr[row][col - 1].letter == ' '){
 							while (startCol > 1){
 								if (tileArr[row	   ][startCol - 2].letter != ' ' || 
 									tileArr[row + 1][startCol - 1].letter != ' ' || 
 									tileArr[row - 1][startCol - 1].letter != ' '){
 									break;
 								}
+								
 								startCol--;
 							}
 						}
 						
 						//check how far right the word can go without collisions
-						if (col < 14 && tileArr[row][col + 1].letter == ' '){
-							while (endCol < 13){
-								if (tileArr[row    ][endCol + 2].letter != ' ' || 
+						if (col < 15 && tileArr[row][col + 1].letter == ' '){
+							while (endCol < 14){
+								if (
 									tileArr[row + 1][endCol + 1].letter != ' ' || 
 									tileArr[row - 1][endCol + 1].letter != ' '){
 									break;
 								}
+								if (endCol == 13 || tileArr[row    ][endCol + 2].letter != ' '){
+									break;
+								}
+								
 								endCol++;
 							}
 						}
-						if (col - startCol > 0 && endCol - col > 0){
-							anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col, true));
+						if (col - startCol > 0 || endCol - col > 0){
+							if (col - startCol > 0 && endCol - col > 0){
+								anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , true));
+							} else {
+								//if only one then we need to do additional checks
+								if (col - startCol > 0){
+									if (tileArr[row][col + 1].letter == ' '){
+										anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , false));
+									}
+								}
+								if (endCol - col> 0){
+									if (tileArr[row][col - 1 ].letter == ' '){
+										anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , false));
+									}
+								}
+							}
 						} 
 					}		
 					
@@ -170,7 +189,7 @@ public class AI implements Constants {
 						int endRow = row;
 						
 						//check how high the word can go without collisions
-						if (row > 1 && tileArr[row - 1][col].letter == ' '){
+						if (row > 0 && tileArr[row - 1][col].letter == ' '){
 							while (startRow > 1){
 								if (tileArr[startRow - 2][col    ].letter != ' ' || 
 									tileArr[startRow - 1][col + 1].letter != ' ' || 
@@ -183,18 +202,42 @@ public class AI implements Constants {
 						}
 						
 						//check how low the word can go without collisions
-						if (row < 14 && tileArr[row + 1][col].letter == ' '){
-							while (endRow < 13){
-								if (tileArr[endRow + 2][col    ].letter != ' ' || 
+						if (row < 15 && tileArr[row + 1][col].letter == ' '){
+							while (endRow < 14){
+								if (
 									tileArr[endRow + 1][col + 1].letter != ' ' || 
 									tileArr[endRow + 1][col - 1].letter != ' '){
 									break;
 								}
+								if (endRow == 13){
+									endRow++;
+									break;
+								}
+								if(tileArr[endRow + 2][col    ].letter != ' '){
+									break;
+								}
+									
 								endRow++;
 							}
 						}
-						if (row - startRow > 0 && endRow - row > 0){
-							anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
+					
+						if (row - startRow > 0 || endRow - row > 0){
+							if (row - startRow > 0 && endRow - row > 0){
+								anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
+							} else{
+								//if only one then we need to do additional checks
+								if (row - startRow > 0){
+									if (tileArr[row+1][col ].letter == ' '){
+										anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
+									}
+								}
+								if (endRow - row > 0){
+									if (tileArr[row-1][col ].letter == ' '){
+										anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
+									}
+								}
+							}
+							
 						}
 					}			
 				}

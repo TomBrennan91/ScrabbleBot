@@ -2,13 +2,14 @@ import java.util.ArrayList;
 
 public class Move {
 	
-	public Move(ArrayList<Tile> tiles, int startRow, int startCol, boolean across, int score) {
+	public Move(ArrayList<Tile> tiles, int startRow, int startCol, boolean across, int score, Player player) {
 		super();
 		this.tiles = tiles;
 		this.startRow = startRow;
 		this.startCol = startCol;
 		this.across = across;
 		this.score = score;
+		this.player = player;
 	}
 
 	@Override
@@ -25,6 +26,7 @@ public class Move {
 	int startCol;
 	boolean across;
 	int score;
+	Player player;
 	
 	void execute(Tile[][] tileArr){
 		int row = startRow;
@@ -38,5 +40,6 @@ public class Move {
 				row++;
 			}
 		}
+		player.awardPoints(score);
 	}
 }

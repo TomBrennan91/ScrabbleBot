@@ -8,7 +8,6 @@ public class Tile {
 	int points;
 	JButton icon;
 	
-	
 	public Tile(char letter, int points) {
 		super();
 		this.letter = letter;
@@ -16,7 +15,7 @@ public class Tile {
 		//build Tile Icon
 		icon = new JButton("" + letter);
 		icon.setBackground(Color.yellow);
-		icon.setFont(new Font("calibri", 1, 23));
+		icon.setFont(new Font("calibri", 1, 21));
 
 	}
 	
@@ -24,7 +23,5 @@ public class Tile {
 	public String toString() {
 		return "Tile [letter=" + letter + ", points=" + points + "]";
 	}
-	
-
 	
 }

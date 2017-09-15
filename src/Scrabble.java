@@ -14,7 +14,7 @@ public class Scrabble {
 	
 	static void buildUI(){
 		
-		Player user = new Player("josef", false);
+		Player user = new Player("Josef", false);
 		Player bot = new Player("ScrabbleBot", true);
 		
 		JFrame f = new JFrame("Tom Brennan's ScrabbleBot");
@@ -28,12 +28,12 @@ public class Scrabble {
 		f.add(bot.display, BorderLayout.NORTH);
 		
 		new Dictionary();
-		AI ai = new AI();
+		AI ai = new AI(bot);
 		ai.makeFirstMove(bot.letterRack.tiles);
 		
 		bot.letterRack.refill();
 		
-		f.setSize(800,900);  
+		f.setSize(900,1000);  
         f.setVisible(true);
         f.setLocation(100, 100);
 		f.requestFocus();

@@ -2,13 +2,19 @@ import java.util.ArrayList;
 
 public class AI {
 	
+	public AI(Player bot) {
+		this.bot = bot;
+	}
+
+	Player bot;
 	int maxScore ;
 	ArrayList<Tile> bestWord;
+	
 	
 	void makeFirstMove(ArrayList<Tile> tiles){
 		bestWord = new ArrayList<Tile>();
 		findHighestScoringWord( tiles, bestWord, "", 0);
-		Move move = new Move(bestWord ,  7, 7 - (bestWord.size() / 2), true, maxScore);
+		Move move = new Move(bestWord ,  7, 7 - (bestWord.size() / 2), true, maxScore, bot);
 		move.execute(Board.getInstance().tileArr);
 		System.out.println(move.toString());
 		Board.getInstance().reDraw();

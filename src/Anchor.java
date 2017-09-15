@@ -1,0 +1,21 @@
+//I define an anchor as a tile on the board from which a new word could be 'anchored' as a move.
+//in this primitive definition, it must be possible to add a word while only adding a single word to an anchor
+
+public class Anchor {
+	public Anchor(int row, int col, Tile anchorTile, int prefixCap, int postfixCap, boolean across) {
+		super();
+		this.row = row;
+		this.col = col;
+		this.anchorTile = anchorTile;
+		this.prefixCap = prefixCap;
+		this.postfixCap = postfixCap;
+		this.across = across;
+	}
+	int row;
+	int col;
+	Tile anchorTile;
+	int prefixCap;
+	int postfixCap;
+	boolean across;
+	
+}

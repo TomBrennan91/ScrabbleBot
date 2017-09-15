@@ -24,12 +24,14 @@ public class Scrabble {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		f.add(board.boardCanvas, BorderLayout.CENTER);
-		f.add(user.letterRack.display, BorderLayout.SOUTH);
-		f.add(bot.letterRack.display, BorderLayout.NORTH);
+		f.add(user.display, BorderLayout.SOUTH);
+		f.add(bot.display, BorderLayout.NORTH);
 		
 		new Dictionary();
 		AI ai = new AI();
-		ai.findHighestScoringWord(bot.letterRack.tiles, "", 0);
+		ai.makeFirstMove(bot.letterRack.tiles);
+		
+		bot.letterRack.refill();
 		
 		f.setSize(800,900);  
         f.setVisible(true);

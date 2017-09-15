@@ -29,7 +29,28 @@ public class Board implements Constants{
 				tileArr[row][col] = blank;
 			}
 		}
-		
+	}
+	
+	
+	
+	void print() {
+		for (int row = 0 ; row < tileArr.length ; row ++){
+			StringBuilder boardString = new StringBuilder();
+			for (int col = 0 ; col < tileArr[0].length ; col ++){
+				boardString.append(tileArr[row][col].letter);
+			}
+			System.out.println(boardString.toString());
+		}
+	}
+
+
+	void reDraw(){
+		for (int row = 0 ; row < tileArr.length ; row ++){
+			for (int col = 0 ; col < tileArr[0].length ; col ++){
+				boardCanvas.remove(0);
+				boardCanvas.add(tileArr[row][col].icon);
+			}
+		}
 	}
 	
 	

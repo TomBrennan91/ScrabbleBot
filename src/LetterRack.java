@@ -9,15 +9,12 @@ import javax.swing.JPanel;
 
 public class LetterRack implements Constants{
 	ArrayList<Tile> tiles;
-	JPanel display;
 	JPanel tilePanel;
-	
-	LetterRack(){
+	Player owner;
+	LetterRack(Player owner){
+		this.owner = owner;
 		tiles = new ArrayList<Tile>();
 		refill();
-		display = new JPanel();
-		display.setBackground(Color.GREEN);
-		display.setLayout(new BorderLayout());
 		
 		tilePanel = new JPanel(new GridBagLayout());
 		
@@ -36,7 +33,6 @@ public class LetterRack implements Constants{
 				tilePanel.add(blank, gbc);
 			}
 		}
-		display.add(tilePanel, BorderLayout.CENTER);
 	}
 	
 	

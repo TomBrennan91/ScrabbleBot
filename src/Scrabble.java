@@ -40,11 +40,32 @@ public class Scrabble {
 			System.out.println(anchor.toString());
 		}
 		
-				
+		//bot.getMoreTiles();
+		ai.makeSubsequentMove();
+		
+		for (Anchor anchor : ai.findAnchors()){
+			System.out.println(anchor.toString());
+		}
+		
+		ai.makeSubsequentMove();
+		
+		for (Anchor anchor : ai.findAnchors()){
+			System.out.println(anchor.toString());
+		}
+		
+		ai.makeSubsequentMove();
+		
+		
+		for (Anchor anchor : ai.findAnchors()){
+			System.out.println(anchor.toString());
+		}
+		
+		ai.makeSubsequentMove();
 		
 		f.setSize(900,1000);  
         f.setVisible(true);
         f.setLocation(100, 100);
 		f.requestFocus();
+
 	}
 }

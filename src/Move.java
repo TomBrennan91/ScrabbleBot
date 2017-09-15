@@ -3,13 +3,26 @@ import java.util.ArrayList;
 public class Move {
 	
 	public Move(ArrayList<Tile> tiles, int startRow, int startCol, boolean across, int score, Player player) {
-		super();
 		this.tiles = tiles;
 		this.startRow = startRow;
 		this.startCol = startCol;
 		this.across = across;
 		this.score = score;
 		this.player = player;
+		this.anchor = null;
+		//TODO: try to remember how to chain constructors
+	}
+	
+	
+	public Move(ArrayList<Tile> tiles, int startRow, int startCol, boolean across, int score, Player player, Anchor anchor) {
+		
+		this.tiles = tiles;
+		this.startRow = startRow;
+		this.startCol = startCol;
+		this.across = across;
+		this.score = score;
+		this.player = player;
+		this.anchor = anchor;
 	}
 
 	@Override
@@ -27,6 +40,7 @@ public class Move {
 	boolean across;
 	int score;
 	Player player;
+	Anchor anchor;
 	
 	void execute(Tile[][] tileArr){
 		int row = startRow;
@@ -39,7 +53,10 @@ public class Move {
 			} else {
 				row++;
 			}
+			player.letterRack.tiles.remove(tile);
 		}
 		player.awardPoints(score);
+		
+		player.getMoreTiles();
 	}
 }

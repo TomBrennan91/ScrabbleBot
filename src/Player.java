@@ -19,8 +19,7 @@ public class Player {
 		this.letterRack = new LetterRack(this);
 		this.Score = 0;
 		System.out.println("Player: '" + name + "' has entered the game");
-		//System.out.println(name + " has the Tiles:");
-		//this.letterRack.readTiles();
+
 		display = new JPanel();
 		//display.setBackground(new Color(0, 120, 0));
 		display.setLayout(new BorderLayout());
@@ -38,5 +37,14 @@ public class Player {
 		Score += points;
 		scoreLabel.setText("Score: " + Score);
 	}
+	
+	void getMoreTiles(){
+		
+		letterRack.refill();
+		
+		display.add(letterRack.tilePanel, BorderLayout.CENTER);
+		System.out.println("bot now has letters: " + letterRack.tiles.toString());
+	}
+	
 	
 }

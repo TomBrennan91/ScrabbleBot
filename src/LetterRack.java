@@ -14,16 +14,16 @@ public class LetterRack implements Constants{
 		this.owner = owner;
 		tiles = new ArrayList<Tile>();
 		refill();
-		
+
+	}
+
+
+	private void drawTileRack() {
 		tilePanel = new JPanel(new GridBagLayout());
-		
 		GridBagConstraints gbc = new GridBagConstraints();
-		
 		for (int i = 0 ; i < TILES_IN_RACK ; i++){
-			
 			gbc.gridx = i;
 			gbc.gridy = 1;
-			
 			if (i < tiles.size()){
 				tilePanel.add(tiles.get(i).icon, gbc);
 			} else {
@@ -33,6 +33,8 @@ public class LetterRack implements Constants{
 			}
 		}
 	}
+	
+	
 	
 	
 	
@@ -47,6 +49,9 @@ public class LetterRack implements Constants{
 		while (tiles.size() < TILES_IN_RACK){
 			tiles.add(TileBag.getInstance().takeOutTile());
 		}
+		
+		
+		drawTileRack();
 	}
 	
 	

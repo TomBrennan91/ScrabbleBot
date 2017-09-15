@@ -114,9 +114,39 @@ public class AI implements Constants {
 			for (int col = 0 ; col < tileArr[0].length ; col ++){
 				if (tileArr[row][col].letter != ' '){
 					
-					//ToDo: look for across anchors
-					int startCol = col;
-					int endCol = col;
+					//check not at edges - have to re-think algorithm for edges.
+					if (row != 0 && row != BOARD_DIMENSIONS){
+						int startCol = col;
+						int endCol = col;
+						
+						//check how far left the word can go without collisions
+						if (row > 1 && tileArr[row][col - 1].letter == ' '){
+							while (startCol > 1){
+								if (tileArr[row	   ][startCol - 2].letter != ' ' && 
+									tileArr[row + 1][startCol - 1].letter != ' ' && 
+									tileArr[row - 1][startCol - 1].letter != ' '){
+									break;
+								}
+								startCol--;
+							}
+						}
+						
+						//check how far right the word can go without collisions
+						if (row < 14 && tileArr[row][col + 1].letter == ' '){
+							while (endCol < 13){
+								if (tileArr[row + 2][endCol + 2].letter != ' ' && 
+									tileArr[row + 1][endCol + 1].letter != ' ' && 
+									tileArr[row - 1][endCol + 1].letter != ' '){
+									break;
+								}
+								endCol++;
+							}
+						}
+						if (col - startCol > 0 && endCol - col > 0){
+							anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col, true));
+						} 
+					}		
+					
 					
 					//check not at edges - have to re-think algorithm for edges.
 					if (col != 0 && col != BOARD_DIMENSIONS){
@@ -124,7 +154,7 @@ public class AI implements Constants {
 						int endRow = row;
 						
 						//check how high the word can go without collisions
-						if (row > 1 && tileArr[startRow - 1][col].letter == ' '){
+						if (row > 1 && tileArr[row - 1][col].letter == ' '){
 							while (startRow > 1){
 								if (tileArr[startRow - 2][col].letter != ' ' && 
 									tileArr[startRow - 1][col + 1].letter != ' ' && 
@@ -137,7 +167,7 @@ public class AI implements Constants {
 						}
 						
 						//check how low the word can go without collisions
-						if (row < 14 && tileArr[endRow + 1][col].letter == ' '){
+						if (row < 14 && tileArr[row + 1][col].letter == ' '){
 							while (endRow < 13){
 								if (tileArr[endRow + 2][col].letter != ' ' && 
 									tileArr[endRow + 1][col + 1].letter != ' ' && 

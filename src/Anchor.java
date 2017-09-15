@@ -22,7 +22,7 @@ public class Anchor {
 	
 	@Override
 	public String toString() {
-		return "Anchor [row=" + row + ", col=" + col + ", anchorTile=" + anchorTile + ", prefixCap=" + prefixCap
+		return "Anchor [" + row + "," + col + " " + anchorTile.letter + ", prefixCap=" + prefixCap
 				+ ", postfixCap=" + postfixCap + ", across=" + across + "]";
 	}
 

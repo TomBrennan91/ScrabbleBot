@@ -59,8 +59,8 @@ public class Scrabble {
 		for (Anchor anchor : ai.findAnchors()){
 			System.out.println(anchor.toString());
 		}
-		
-		ai.makeSubsequentMove();
+//		
+//		ai.makeSubsequentMove();
 		
 		f.setSize(900,1000);  
         f.setVisible(true);

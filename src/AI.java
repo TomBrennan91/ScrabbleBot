@@ -87,9 +87,9 @@ public class AI implements Constants {
 	void  getStartingWord(ArrayList<Tile> inputTiles, ArrayList<Tile> tilesToBeUsed, String currentWord, int score){
 		for (int tileNo = 0 ; tileNo < inputTiles.size() ; tileNo++){
 			Tile curTile = inputTiles.get(tileNo);
-			////System.out.println(currentWord + curTile.letter);
+			
 			if (Dictionary.trie.searchPrefix(currentWord + curTile.letter)){
-				//System.out.println(currentWord + curTile.letter + " is prefix");
+				
 				ArrayList<Tile> remainingTiles = new ArrayList<Tile>( inputTiles);
 				ArrayList<Tile> tilesInWord = new ArrayList<Tile>(tilesToBeUsed);
 				remainingTiles.remove(tileNo);
@@ -120,10 +120,10 @@ public class AI implements Constants {
 						int endCol = col;
 						
 						//check how far left the word can go without collisions
-						if (row > 1 && tileArr[row][col - 1].letter == ' '){
+						if (col > 1 && tileArr[row][col - 1].letter == ' '){
 							while (startCol > 1){
-								if (tileArr[row	   ][startCol - 2].letter != ' ' && 
-									tileArr[row + 1][startCol - 1].letter != ' ' && 
+								if (tileArr[row	   ][startCol - 2].letter != ' ' || 
+									tileArr[row + 1][startCol - 1].letter != ' ' || 
 									tileArr[row - 1][startCol - 1].letter != ' '){
 									break;
 								}
@@ -132,10 +132,10 @@ public class AI implements Constants {
 						}
 						
 						//check how far right the word can go without collisions
-						if (row < 14 && tileArr[row][col + 1].letter == ' '){
+						if (col < 14 && tileArr[row][col + 1].letter == ' '){
 							while (endCol < 13){
-								if (tileArr[row + 2][endCol + 2].letter != ' ' && 
-									tileArr[row + 1][endCol + 1].letter != ' ' && 
+								if (tileArr[row    ][endCol + 2].letter != ' ' || 
+									tileArr[row + 1][endCol + 1].letter != ' ' || 
 									tileArr[row - 1][endCol + 1].letter != ' '){
 									break;
 								}
@@ -156,8 +156,8 @@ public class AI implements Constants {
 						//check how high the word can go without collisions
 						if (row > 1 && tileArr[row - 1][col].letter == ' '){
 							while (startRow > 1){
-								if (tileArr[startRow - 2][col].letter != ' ' && 
-									tileArr[startRow - 1][col + 1].letter != ' ' && 
+								if (tileArr[startRow - 2][col    ].letter != ' ' || 
+									tileArr[startRow - 1][col + 1].letter != ' ' || 
 									tileArr[startRow - 1][col - 1].letter != ' '){
 									break;
 								}
@@ -169,8 +169,8 @@ public class AI implements Constants {
 						//check how low the word can go without collisions
 						if (row < 14 && tileArr[row + 1][col].letter == ' '){
 							while (endRow < 13){
-								if (tileArr[endRow + 2][col].letter != ' ' && 
-									tileArr[endRow + 1][col + 1].letter != ' ' && 
+								if (tileArr[endRow + 2][col    ].letter != ' ' || 
+									tileArr[endRow + 1][col + 1].letter != ' ' || 
 									tileArr[endRow + 1][col - 1].letter != ' '){
 									break;
 								}

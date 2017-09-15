@@ -36,32 +36,20 @@ public class Scrabble {
 		AI ai = new AI(bot);
 		ai.makeFirstMove(bot.letterRack.tiles);
 		
-		for (Anchor anchor : ai.findAnchors()){
-			System.out.println(anchor.toString());
-		}
-		
-		//bot.getMoreTiles();
-		ai.makeSubsequentMove();
-		
-		for (Anchor anchor : ai.findAnchors()){
-			System.out.println(anchor.toString());
-		}
-		
-		ai.makeSubsequentMove();
-		
-		for (Anchor anchor : ai.findAnchors()){
-			System.out.println(anchor.toString());
-		}
-		
-		ai.makeSubsequentMove();
 		
 		
 		for (Anchor anchor : ai.findAnchors()){
 			System.out.println(anchor.toString());
 		}
-//		
-//		ai.makeSubsequentMove();
+		for (int i = 0 ; i < 10; i++){
+			ai.makeSubsequentMove();
+			for (Anchor anchor : ai.findAnchors()){
+				System.out.println(anchor.toString());
+			}
+		}
 		
+		
+
 		f.setSize(900,1000);  
         f.setVisible(true);
         f.setLocation(100, 100);

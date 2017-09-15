@@ -43,6 +43,9 @@ public class Move {
 	Anchor anchor;
 	
 	void execute(Tile[][] tileArr){
+		
+		System.out.println("Executing: " + toString());
+		
 		int row = startRow;
 		int col = startCol;
 		

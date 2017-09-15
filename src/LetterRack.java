@@ -17,7 +17,6 @@ public class LetterRack implements Constants{
 
 	}
 
-
 	private void drawTileRack() {
 		tilePanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -34,12 +33,7 @@ public class LetterRack implements Constants{
 		}
 	}
 	
-	
-	
-	
-	
 	public void readTiles(){
-		
 		for (Tile tile : tiles ){
 			System.out.println(tile.toString());
 		}
@@ -49,8 +43,6 @@ public class LetterRack implements Constants{
 		while (tiles.size() < TILES_IN_RACK){
 			tiles.add(TileBag.getInstance().takeOutTile());
 		}
-		
-		
 		drawTileRack();
 	}
 	

@@ -2,7 +2,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -14,12 +13,10 @@ public class LetterRack implements Constants{
 	JPanel tilePanel;
 	
 	LetterRack(){
-		
 		tiles = new ArrayList<Tile>();
 		refill();
 		display = new JPanel();
 		display.setBackground(Color.GREEN);
-		
 		display.setLayout(new BorderLayout());
 		
 		tilePanel = new JPanel(new GridBagLayout());
@@ -39,9 +36,7 @@ public class LetterRack implements Constants{
 				tilePanel.add(blank, gbc);
 			}
 		}
-		
 		display.add(tilePanel, BorderLayout.CENTER);
-		
 	}
 	
 	

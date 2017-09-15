@@ -1,9 +1,5 @@
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Board implements Constants{
@@ -17,22 +13,20 @@ public class Board implements Constants{
 	}
 	
 	JPanel boardCanvas;
-	char[][] tileArr;
+	Tile[][] tileArr;
 	
 	Board(){
 		boardCanvas = new JPanel();
 		boardCanvas.setLayout(new GridLayout(BOARD_DIMENSIONS, BOARD_DIMENSIONS));
-		//GridBagConstraints gbc = new GridBagConstraints();
-		tileArr = new char[BOARD_DIMENSIONS][BOARD_DIMENSIONS];
+		tileArr = new Tile[BOARD_DIMENSIONS][BOARD_DIMENSIONS];
+		
 		
 		//fill board with blank buttons
-		
 		for (int row = 0 ; row < tileArr.length ; row ++){
 			for (int col = 0 ; col < tileArr[0].length ; col ++){
-
-				JButton blank = new JButton("");
-				blank.setBackground(Color.WHITE);
-				boardCanvas.add(blank);
+				Tile blank = new BlankTile();
+				boardCanvas.add(blank.icon);
+				tileArr[row][col] = blank;
 			}
 		}
 		

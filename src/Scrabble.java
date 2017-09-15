@@ -12,12 +12,10 @@ public class Scrabble {
 		
 	}
 	
-	
 	static void buildUI(){
 		
 		Player user = new Player("josef", false);
 		Player bot = new Player("ScrabbleBot", true);
-		
 		
 		JFrame f = new JFrame("Tom Brennan's ScrabbleBot");
 		Board board = Board.getInstance();
@@ -29,13 +27,14 @@ public class Scrabble {
 		f.add(user.letterRack.display, BorderLayout.SOUTH);
 		f.add(bot.letterRack.display, BorderLayout.NORTH);
 		
+		new Dictionary();
+		AI ai = new AI();
+		ai.findHighestScoringWord(bot.letterRack.tiles, "", 0);
+		
 		f.setSize(800,900);  
         f.setVisible(true);
         f.setLocation(100, 100);
 		f.requestFocus();
-		
-		
+
 	}
-	
-	
 }

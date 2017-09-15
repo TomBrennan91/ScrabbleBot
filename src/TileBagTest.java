@@ -1,6 +1,5 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class TileBagTest {
@@ -9,7 +8,7 @@ public class TileBagTest {
 	public void test() {
 		TileBag bag = new TileBag();
 		while (!bag.isEmpty()){
-			System.out.println(bag.takeOutTile());
+			bag.takeOutTile(); //System.out.println());
 		}
 		assertTrue(true);
 	}

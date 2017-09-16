@@ -43,7 +43,7 @@ public class Player {
 		letterRack.refill();
 		
 		display.add(letterRack.tilePanel, BorderLayout.CENTER);
-		System.out.println("bot now has letters: " + letterRack.tiles.toString());
+		//System.out.println("bot now has letters: " + letterRack.tiles.toString());
 	}
 	
 	

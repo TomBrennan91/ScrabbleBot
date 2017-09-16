@@ -23,7 +23,7 @@ public class LetterRack implements Constants{
 		for (int i = 0 ; i < TILES_IN_RACK ; i++){
 			gbc.gridx = i;
 			gbc.gridy = 1;
-			if (i < tiles.size()){
+			if (tiles.get(i) != null){
 				tilePanel.add(tiles.get(i).icon, gbc);
 			} else {
 				JButton blank = new JButton("");
@@ -43,6 +43,7 @@ public class LetterRack implements Constants{
 		while (tiles.size() < TILES_IN_RACK){
 			tiles.add(TileBag.getInstance().takeOutTile());
 		}
+		System.out.println("bot has tiles:" + tiles.toString());
 		drawTileRack();
 	}
 	

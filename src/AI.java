@@ -20,7 +20,7 @@ public class AI implements Constants {
 		//Board.getInstance().print();
 	}
 	
-	void makeSubsequentMove(){
+	boolean makeSubsequentMove(){
 		maxScore = 0;
 		bestWord = new ArrayList<Tile>();
 		for (Anchor anchor : findAnchors()){
@@ -29,21 +29,28 @@ public class AI implements Constants {
 			findHighestScoringWord(inputTiles, new ArrayList<Tile>(), "", 0, anchor);
 		}
 		
-		int startCol;
-		int startRow;
 		
-		if (currentAnchor.across){
-			startCol = currentAnchor.col - getAnchorPosition(currentAnchor, bestWord);
-			startRow = currentAnchor.row;
+		if (bestWord == null || bestWord.size() == 0){
+			System.err.println("Scrabblebot passes this turn");
+			return false;
 		} else {
-			startCol = currentAnchor.col;
-			startRow = currentAnchor.row - getAnchorPosition(currentAnchor, bestWord);
-		}
 		
-		Move move = new Move(bestWord , startRow , startCol ,currentAnchor.across, maxScore , bot);
-		move.execute(Board.getInstance().tileArr);
-		System.out.println(move.toString());
-		Board.getInstance().reDraw();
+			int startCol;
+			int startRow;
+			if (currentAnchor.across){
+				startCol = currentAnchor.col - getAnchorPosition(currentAnchor, bestWord);
+				startRow = currentAnchor.row;
+			} else {
+				startCol = currentAnchor.col;
+				startRow = currentAnchor.row - getAnchorPosition(currentAnchor, bestWord);
+			}
+			
+			Move move = new Move(bestWord , startRow , startCol ,currentAnchor.across, maxScore , bot);
+			move.execute(Board.getInstance().tileArr);
+			System.out.println(move.toString());
+			Board.getInstance().reDraw();
+		}
+		return true;
 	}
 	
 	private int getAnchorPosition(Anchor anchor, ArrayList<Tile> word){
@@ -60,7 +67,7 @@ public class AI implements Constants {
 	//check if word would cause spilling off the edge of the board
 		int anchorPos = getAnchorPosition(anchor, word);
 		int prefixLength = anchorPos;
-		int posfixLength = word.size() - anchorPos;
+		int posfixLength = word.size() - anchorPos - 1 ;
 		
 		if (anchor.prefixCap >= prefixLength && anchor.postfixCap >= posfixLength){
 			return true;
@@ -73,6 +80,7 @@ public class AI implements Constants {
 	private void  findHighestScoringWord(ArrayList<Tile> inputTiles, ArrayList<Tile> tilesToBeUsed, String currentWord, int score, Anchor anchor){
 		for (int tileNo = 0 ; tileNo < inputTiles.size() ; tileNo++){
 			Tile curTile = inputTiles.get(tileNo);
+			if (curTile == null) break;
 			////System.out.println(currentWord + curTile.letter);
 			if (Dictionary.trie.searchPrefix(currentWord + curTile.letter)){
 				//System.out.println(currentWord + curTile.letter + " is prefix");
@@ -129,117 +137,133 @@ public class AI implements Constants {
 		for (int row = 0 ; row < tileArr.length ; row ++){
 			for (int col = 0 ; col < tileArr[0].length ; col ++){
 				if (tileArr[row][col].letter != ' '){
+
+					int startCol = col;
+					int endCol = col;
 					
-					//check not at edges - have to re-think algorithm for edges.
-					if (row != 0 && row != BOARD_DIMENSIONS){
-						int startCol = col;
-						int endCol = col;
-						
-						//check how far left the word can go without collisions
-						if (col > 0 && tileArr[row][col - 1].letter == ' '){
-							while (startCol > 1){
-								if (tileArr[row	   ][startCol - 2].letter != ' ' || 
-									tileArr[row + 1][startCol - 1].letter != ' ' || 
-									tileArr[row - 1][startCol - 1].letter != ' '){
-									break;
-								}
-								
+					//check how far left the word can go without collisions
+					if (col > 0 && tileArr[row][col - 1].letter == ' '){
+						while (startCol > 0){
+							if (row != BOARD_DIMENSIONS - 1 && tileArr[row + 1][startCol - 1].letter != ' '){
+								break;
+							}
+							if ( row != 0 && tileArr[row - 1][startCol - 1].letter != ' '){
+								break;
+							}
+							if (startCol == 1){
 								startCol--;
+								break;
 							}
+							if (tileArr[row    ][startCol -2].letter != ' '){
+								break;
+							}
+							startCol--;
 						}
-						
-						//check how far right the word can go without collisions
-						if (col < 15 && tileArr[row][col + 1].letter == ' '){
-							while (endCol < 14){
-								if (
-									tileArr[row + 1][endCol + 1].letter != ' ' || 
-									tileArr[row - 1][endCol + 1].letter != ' '){
-									break;
-								}
-								if (endCol == 13 || tileArr[row    ][endCol + 2].letter != ' '){
-									break;
-								}
-								
-								endCol++;
-							}
-						}
-						if (col - startCol > 0 || endCol - col > 0){
-							if (col - startCol > 0 && endCol - col > 0){
-								anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , true));
-							} else {
-								//if only one then we need to do additional checks
-								if (col - startCol > 0){
-									if (tileArr[row][col + 1].letter == ' '){
-										anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , false));
-									}
-								}
-								if (endCol - col> 0){
-									if (tileArr[row][col - 1 ].letter == ' '){
-										anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , false));
-									}
-								}
-							}
-						} 
-					}		
+					}
 					
+					//check how far right the word can go without collisions
+					if (col < BOARD_DIMENSIONS - 1 && tileArr[row][col + 1].letter == ' '){
+						while (endCol < BOARD_DIMENSIONS -1 ){
+							
+							if (row != BOARD_DIMENSIONS - 1 && tileArr[row + 1][endCol + 1].letter != ' '){
+								break;
+							}		
+							if ( row != 0 && tileArr[row - 1][endCol + 1].letter != ' '){
+								break;
+							}
+							if (endCol == BOARD_DIMENSIONS - 2){
+								endCol++;
+								break;
+							}
+									
+							if (tileArr[row    ][endCol + 2].letter != ' '){
+								break;
+							}
+							
+							endCol++;
+						}
+					}
+					
+					//add the horizontal anchors
+					if (col - startCol > 0 && endCol - col > 0){ // words that can go left or right
+						anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , true));
+					} else {
+						//if only one then we need to do additional checks
+						if (col - startCol > 0){
+							if (col < BOARD_DIMENSIONS - 1 && tileArr[row][col + 1].letter == ' '){  // words that can only go left
+								anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , true));
+							}
+						}
+						if (endCol - col > 0){
+							if (col > 0 && tileArr[row][col - 1 ].letter == ' '){ // words that can only go right
+								anchors.add(new Anchor(row, col, tileArr[row][col], col - startCol, endCol - col , true));
+							}
+						}
+					}				
 					
 					//check not at edges - have to re-think algorithm for edges.
-					if (col != 0 && col != BOARD_DIMENSIONS){
-						int startRow = row;
-						int endRow = row;
-						
-						//check how high the word can go without collisions
-						if (row > 0 && tileArr[row - 1][col].letter == ' '){
-							while (startRow > 1){
-								if (tileArr[startRow - 2][col    ].letter != ' ' || 
-									tileArr[startRow - 1][col + 1].letter != ' ' || 
-									tileArr[startRow - 1][col - 1].letter != ' '){
-									break;
-								}
-								startRow--;
-							}
-							
-						}
-						
-						//check how low the word can go without collisions
-						if (row < 15 && tileArr[row + 1][col].letter == ' '){
-							while (endRow < 14){
-								if (
-									tileArr[endRow + 1][col + 1].letter != ' ' || 
-									tileArr[endRow + 1][col - 1].letter != ' '){
-									break;
-								}
-								if (endRow == 13){
-									endRow++;
-									break;
-								}
-								if(tileArr[endRow + 2][col    ].letter != ' '){
-									break;
-								}
-									
-								endRow++;
-							}
-						}
+					int startRow = row;
+					int endRow = row;
 					
-						if (row - startRow > 0 || endRow - row > 0){
-							if (row - startRow > 0 && endRow - row > 0){
-								anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
-							} else{
-								//if only one then we need to do additional checks
-								if (row - startRow > 0){
-									if (tileArr[row+1][col ].letter == ' '){
-										anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
-									}
-								}
-								if (endRow - row > 0){
-									if (tileArr[row-1][col ].letter == ' '){
-										anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
-									}
-								}
+					//check how high the word can go without collisions
+					if (row > 0 && tileArr[row - 1][col].letter == ' '){
+						while (startRow > 0){
+							if (col < BOARD_DIMENSIONS - 1 && tileArr[startRow - 1][col + 1].letter != ' '){
+								break;
 							}
-							
+							if (col > 0 && tileArr[startRow - 1][col - 1].letter != ' '){
+								break;
+							}
+							if (startRow == 1){
+								startRow--;
+								break;
+							}
+							if (tileArr[startRow - 2][col    ].letter != ' '){
+								break;
+							}
+							startRow--;
 						}
-					}			
+						
+					}
+					
+					//check how low the word can go without collisions
+					if (row < BOARD_DIMENSIONS - 1 && tileArr[row + 1][col].letter == ' '){
+						while (endRow < BOARD_DIMENSIONS -1){
+							if (col < BOARD_DIMENSIONS - 1 && tileArr[endRow + 1][col + 1].letter != ' '){
+								break;
+							}
+							if (col > 0 &&	tileArr[endRow + 1][col - 1].letter != ' '){
+								break;
+							}
+							if (endRow == BOARD_DIMENSIONS - 2){
+								endRow++;
+								break;
+							}
+							if(tileArr[endRow + 2][col].letter != ' '){
+								break;
+							}
+								
+							endRow++;
+						}
+					}
+				
+
+					if (row - startRow > 0 && endRow - row > 0){
+						anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
+					} else{//if only one then we need to do additional checks
+						if (row - startRow > 0){ //words that can only go up
+							if (row < BOARD_DIMENSIONS-1 && tileArr[row+1][col].letter == ' '){
+								anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
+							}
+						}
+						if (endRow - row > 0){ //words that can only go down
+							if (row > 0 && tileArr[row-1][col].letter == ' '){
+								anchors.add(new Anchor(row, col, tileArr[row][col], row - startRow, endRow - row, false));
+							}
+						}
+					}
+							
+								
 				}
 			}
 		}

@@ -30,16 +30,16 @@ public class Scrabble {
 		f.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel southPanel =  new JPanel();
+		JPanel eastPanel =  new JPanel();
 		JPanel ui = new JPanel();
 		
 		JLabel lettersInBag = new JLabel("Remaining Letters: ");
 		ui.add(lettersInBag, BorderLayout.WEST);
 		
 		f.add(board.boardCanvas, BorderLayout.CENTER);
-		southPanel.add(user.display, BorderLayout.SOUTH);
-		southPanel.add(ui,BorderLayout.NORTH);
-		f.add(southPanel, BorderLayout.SOUTH);
+	
+		eastPanel.add(ui,BorderLayout.EAST);
+		f.add(user.display, BorderLayout.SOUTH);
 		f.add(bot.display, BorderLayout.NORTH);
 		
 

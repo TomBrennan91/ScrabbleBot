@@ -81,14 +81,17 @@ public class AI implements Constants {
 		for (int tileNo = 0 ; tileNo < inputTiles.size() ; tileNo++){
 			Tile curTile = inputTiles.get(tileNo);
 			if (curTile == null) break;
-			////System.out.println(currentWord + curTile.letter);
 			if (Dictionary.trie.searchPrefix(currentWord + curTile.letter)){
-				//System.out.println(currentWord + curTile.letter + " is prefix");
+
 				ArrayList<Tile> remainingTiles = new ArrayList<Tile>( inputTiles);
 				ArrayList<Tile> tilesInWord = new ArrayList<Tile>(tilesToBeUsed);
 				remainingTiles.remove(tileNo);
 				tilesInWord.add(curTile);
 				findHighestScoringWord(remainingTiles, tilesInWord ,currentWord  + curTile.letter, score + curTile.points , anchor);
+				
+				if (currentWord.length() >= 7){
+					score += 50;
+				}
 				
 				//need to check if anchor is in the word before we propose it as an answer
 				if (tilesToBeUsed.contains(anchor.anchorTile) || curTile.equals(anchor.anchorTile)){
@@ -119,7 +122,11 @@ public class AI implements Constants {
 				remainingTiles.remove(tileNo);
 				tilesInWord.add(curTile);
 				getStartingWord(remainingTiles, tilesInWord ,currentWord  + curTile.letter, score + curTile.points );
-			
+				
+				if (currentWord.length() >= 6){
+					score += 50;
+				}
+				
 				if (Dictionary.trie.searchWord(currentWord + curTile.letter)){
 					if (maxScore < score + curTile.points){
 						maxScore =  score + curTile.points;

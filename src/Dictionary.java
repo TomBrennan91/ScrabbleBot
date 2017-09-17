@@ -7,7 +7,7 @@ public class Dictionary {
 	static WordTrie trie;
 	
 	public Dictionary() {
-		ReadWordList("wordlist.txt");
+		ReadWordList("longwordlist.txt");
 	}
 	
 	public void ReadWordList(String fileName){

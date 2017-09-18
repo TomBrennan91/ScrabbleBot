@@ -25,8 +25,11 @@ public class LetterRack implements Constants{
 	}
 	
 	private void redrawTiles(){
+		tilePanel.removeAll();
 		GridBagConstraints gbc = new GridBagConstraints();
+		
 		for (int i = 0 ; i < TILES_IN_RACK ; i++){
+			
 			gbc.gridx = i;
 			gbc.gridy = 1;
 			if (tiles.get(i) != null){
@@ -41,7 +44,9 @@ public class LetterRack implements Constants{
 	
 	public void readTiles(){
 		for (Tile tile : tiles ){
-			System.out.println(tile.toString());
+			if (tile != null){
+				System.out.println(tile.toString());
+			}
 		}
 	}
 	
@@ -53,9 +58,26 @@ public class LetterRack implements Constants{
 		drawTileRack();
 	}
 	
+	public void SwapTiles(){
+		for (int i = 0 ; i < TILES_IN_RACK ; i++){
+			Tile tile =tiles.get(0) ; 
+			if (tile != null){
+				TileBag.getInstance().TileSet.add(tile);
+				tilePanel.remove(tiles.get(0).icon);
+			}
+			tiles.remove(0);
+		}
+
+		
+		refill();
+		redrawTiles();
+		readTiles();
+		
+	}
+	
+	
 	public void ShuffleTiles(){
 		Collections.shuffle(tiles);
-		
 		redrawTiles();
 		tilePanel.repaint();
 	}

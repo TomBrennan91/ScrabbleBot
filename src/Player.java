@@ -41,13 +41,20 @@ public class Player {
 	
 	void getMoreTiles(){
 		letterRack.refill();
-		redrawRack();
+		display.add(letterRack.tilePanel, BorderLayout.CENTER);
 		//System.out.println("bot now has letters: " + letterRack.tiles.toString());
 	}
 	
 	void redrawRack(){
+		display.remove(letterRack.tilePanel);
 		display.add(letterRack.tilePanel, BorderLayout.CENTER);
+		display.repaint();
 	}
 	
+	void swapTiles(){
+		letterRack.SwapTiles();
+		redrawRack();
+		Scrabble.log.append(name + " swaps tiles with the bag\n");
+	}
 	
 }

@@ -55,7 +55,7 @@ public class Scrabble {
 			System.out.println(anchor.toString());
 		}
 		
-		boolean aiHasMoved = true;
+//		boolean aiHasMoved = true;
 //		while (aiHasMoved){
 //			aiHasMoved = ai.makeSubsequentMove();
 //		}
@@ -102,12 +102,27 @@ public class Scrabble {
 				ai.makeSubsequentMove();
 			}
 		});
+		pass.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				log.append(user.name + " passes this turn");
+				ai.makeSubsequentMove();
+			}
+		});
+		swap.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				user.swapTiles();
+				ai.makeSubsequentMove();
+			}
+		});
+		
 		
 		JPanel controls = new JPanel();
 		controls.setLayout(new GridLayout(3, 1));
-		controls.add(play );
-		controls.add(pass, BorderLayout.SOUTH);
-		controls.add(swap, BorderLayout.SOUTH);
+		controls.add(play);
+		controls.add(pass);
+		controls.add(swap);
 		//controls.add(shuffle, BorderLayout.SOUTH);
 		return controls;
 	}

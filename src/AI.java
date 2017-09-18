@@ -15,7 +15,7 @@ public class AI implements Constants {
 		getStartingWord( tiles, bestWord, "", 0);
 		Move move = new Move(bestWord , 7 , 7 - (bestWord.size() / 2) , true , maxScore , bot);
 		move.execute(Board.getInstance().tileArr);
-		System.out.println(move.toString());
+		//System.out.println(move.toString());
 		Board.getInstance().reDraw();
 		//Board.getInstance().print();
 	}
@@ -29,7 +29,7 @@ public class AI implements Constants {
 			findHighestScoringWord(inputTiles, new ArrayList<Tile>(), "", 0, anchor);
 		}
 		if (bestWord == null || bestWord.size() == 0){
-			Scrabble.log.append(bot.name + " passes this turn \n");
+			bot.swapTiles();
 			return false;
 		} else {
 		

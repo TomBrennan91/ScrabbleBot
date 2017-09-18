@@ -26,7 +26,7 @@ public class Board implements Constants{
 		//fill board with blank buttons
 		for (int row = 0 ; row < tileArr.length ; row ++){
 			for (int col = 0 ; col < tileArr[0].length ; col ++){
-				Tile blank = new BlankTile();
+				Tile blank = new BlankTile(row,col);
 				boardCanvas.add(blank.icon);
 				tileArr[row][col] = blank;
 			}

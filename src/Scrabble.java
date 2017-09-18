@@ -24,6 +24,8 @@ public class Scrabble {
 	static AI ai;
 	static Player user;
 	static Player bot;
+	static JButton blueTile;
+	
 	public static void main(String[] args) {
 		
 		System.out.println("begin scrabble");

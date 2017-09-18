@@ -55,6 +55,7 @@ public class Player {
 		letterRack.SwapTiles();
 		redrawRack();
 		Scrabble.log.append(name + " swaps tiles with the bag\n");
+		letterRack.tilePanel.repaint();
 	}
 	
 }

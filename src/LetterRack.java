@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,6 +20,11 @@ public class LetterRack implements Constants{
 
 	private void drawTileRack() {
 		tilePanel = new JPanel(new GridBagLayout());
+		
+		redrawTiles();
+	}
+	
+	private void redrawTiles(){
 		GridBagConstraints gbc = new GridBagConstraints();
 		for (int i = 0 ; i < TILES_IN_RACK ; i++){
 			gbc.gridx = i;
@@ -47,5 +53,11 @@ public class LetterRack implements Constants{
 		drawTileRack();
 	}
 	
+	public void ShuffleTiles(){
+		Collections.shuffle(tiles);
+		
+		redrawTiles();
+		tilePanel.repaint();
+	}
 	
 }

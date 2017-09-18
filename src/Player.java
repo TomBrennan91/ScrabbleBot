@@ -41,8 +41,12 @@ public class Player {
 	
 	void getMoreTiles(){
 		letterRack.refill();
-		display.add(letterRack.tilePanel, BorderLayout.CENTER);
+		redrawRack();
 		//System.out.println("bot now has letters: " + letterRack.tiles.toString());
+	}
+	
+	void redrawRack(){
+		display.add(letterRack.tilePanel, BorderLayout.CENTER);
 	}
 	
 	

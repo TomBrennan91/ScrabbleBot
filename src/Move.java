@@ -31,7 +31,7 @@ public class Move {
 		for (Tile tile: tiles){
 			word.append(tile.letter);
 		}
-		return player.name + " places the word '" + word.toString() + "' for " + score + " points \n";
+		return player.name + " places '" + word.toString() + "' for " + score + " points \n";
 	}
 
 	ArrayList<Tile> tiles;
@@ -44,7 +44,7 @@ public class Move {
 	
 	void execute(Tile[][] tileArr){
 		
-		System.out.println("Executing: " + toString());
+		System.out.println(toString());
 		
 		int row = startRow;
 		int col = startCol;

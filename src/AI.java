@@ -29,7 +29,7 @@ public class AI implements Constants {
 			findHighestScoringWord(inputTiles, new ArrayList<Tile>(), "", 0, anchor);
 		}
 		if (bestWord == null || bestWord.size() == 0){
-			Scrabble.log.append(bot.name + " passes this turn");
+			Scrabble.log.append(bot.name + " passes this turn \n");
 			return false;
 		} else {
 		
@@ -128,7 +128,7 @@ public class AI implements Constants {
 				if (Dictionary.trie.searchWord(currentWord + curTile.letter)){
 					if (maxScore < score + curTile.points){
 						maxScore =  score + curTile.points;
-						System.out.println(currentWord + curTile.letter + " is word" + "[" + (score + curTile.points) + "]");
+						//System.out.println(currentWord + curTile.letter + " is word" + "[" + (score + curTile.points) + "]");
 						bestWord = tilesInWord;
 					}	
 				}

@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -17,9 +18,11 @@ public class Board implements Constants{
 	
 	Board(){
 		boardCanvas = new JPanel();
+
 		boardCanvas.setLayout(new GridLayout(BOARD_DIMENSIONS, BOARD_DIMENSIONS));
 		tileArr = new Tile[BOARD_DIMENSIONS][BOARD_DIMENSIONS];
-		
+		boardCanvas.setPreferredSize(new Dimension(1000,1000));
+		boardCanvas.setMinimumSize(new Dimension(1000,1000));
 		//fill board with blank buttons
 		for (int row = 0 ; row < tileArr.length ; row ++){
 			for (int col = 0 ; col < tileArr[0].length ; col ++){

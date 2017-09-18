@@ -49,6 +49,7 @@ public class TileBag {
 		int idx = rnd.nextInt(TileSet.size());
 		Tile tile = TileSet.get(idx);
 		TileSet.remove(idx);
+		Scrabble.lettersInBag.setText(TileSet.size() + " tiles left");
 		return tile;
 	}
 	

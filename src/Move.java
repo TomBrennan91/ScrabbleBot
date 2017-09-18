@@ -31,7 +31,7 @@ public class Move {
 		for (Tile tile: tiles){
 			word.append(tile.letter);
 		}
-		return "word=" + word.toString() + ", startRow=" + startRow + ", startCol=" + startCol + ", across=" + across + ", for " + score + " points";
+		return player.name + " places the word '" + word.toString() + "' for " + score + " points \n";
 	}
 
 	ArrayList<Tile> tiles;
@@ -61,5 +61,9 @@ public class Move {
 		player.awardPoints(score);
 		
 		player.getMoreTiles();
+		Scrabble.log.append(this.toString());
+		
 	}
+	
+	
 }

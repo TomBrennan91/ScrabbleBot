@@ -28,10 +28,8 @@ public class AI implements Constants {
 			inputTiles.add(anchor.anchorTile);
 			findHighestScoringWord(inputTiles, new ArrayList<Tile>(), "", 0, anchor);
 		}
-		
-		
 		if (bestWord == null || bestWord.size() == 0){
-			System.err.println("Scrabblebot passes this turn");
+			Scrabble.log.append(bot.name + " passes this turn");
 			return false;
 		} else {
 		
@@ -47,7 +45,7 @@ public class AI implements Constants {
 			
 			Move move = new Move(bestWord , startRow , startCol ,currentAnchor.across, maxScore , bot);
 			move.execute(Board.getInstance().tileArr);
-			System.out.println(move.toString());
+			//System.out.println(move.toString());
 			Board.getInstance().reDraw();
 		}
 		return true;
@@ -99,7 +97,7 @@ public class AI implements Constants {
 						if (fitsOnBoard(anchor, tilesInWord)){
 							if (maxScore < score + curTile.points){
 								maxScore =  score + curTile.points;
-								System.out.println(currentWord + curTile.letter + " is word" + "[" + (score + curTile.points) + "]");
+								//System.out.println(currentWord + curTile.letter + " is word" + "[" + (score + curTile.points) + "]");
 								bestWord = tilesInWord;
 								currentAnchor = anchor;
 							}	

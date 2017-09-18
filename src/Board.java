@@ -20,7 +20,6 @@ public class Board implements Constants{
 		boardCanvas.setLayout(new GridLayout(BOARD_DIMENSIONS, BOARD_DIMENSIONS));
 		tileArr = new Tile[BOARD_DIMENSIONS][BOARD_DIMENSIONS];
 		
-		
 		//fill board with blank buttons
 		for (int row = 0 ; row < tileArr.length ; row ++){
 			for (int col = 0 ; col < tileArr[0].length ; col ++){
@@ -30,8 +29,6 @@ public class Board implements Constants{
 			}
 		}
 	}
-	
-	
 	
 	void print() {
 		for (int row = 0 ; row < tileArr.length ; row ++){

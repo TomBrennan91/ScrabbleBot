@@ -3,6 +3,7 @@ import java.awt.Font;
 
 import javax.	swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class Player {
 	String name;
@@ -18,7 +19,6 @@ public class Player {
 		this.isAI = isAI;
 		this.letterRack = new LetterRack(this);
 		this.Score = 0;
-		System.out.println("Player: '" + name + "' has entered the game");
 
 		display = new JPanel();
 		//display.setBackground(new Color(0, 120, 0));
@@ -27,6 +27,7 @@ public class Player {
 		
 		JLabel nameLabel = new JLabel(name);
 		nameLabel.setFont(new Font("Calibri", 1, 30));
+		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		display.add(nameLabel, BorderLayout.WEST);
 		scoreLabel = new JLabel("Score: " + Score);
 		scoreLabel.setFont(new Font("Calibri", 1, 30));
@@ -39,9 +40,7 @@ public class Player {
 	}
 	
 	void getMoreTiles(){
-		
 		letterRack.refill();
-		
 		display.add(letterRack.tilePanel, BorderLayout.CENTER);
 		//System.out.println("bot now has letters: " + letterRack.tiles.toString());
 	}

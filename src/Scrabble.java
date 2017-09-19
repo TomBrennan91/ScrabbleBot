@@ -25,7 +25,7 @@ public class Scrabble {
 	static AI ai;
 	static Player user;
 	static Player bot;
-	static JButton blueTile;
+	static Tile blueTile;
 
 	
 	static ArrayList<Tile> PlayerTiles;
@@ -41,6 +41,7 @@ public class Scrabble {
 	static void buildUI(){
 		JPanel eastPanel = drawEastPanel();
 		PlayerTiles = new ArrayList<Tile>();
+		
 		user = new Player("Josef", false);
 		bot = new Player("ScrabbleBot", true);
 		
@@ -94,7 +95,7 @@ public class Scrabble {
 		f.add(user.display, BorderLayout.SOUTH);
 		f.add(bot.display, BorderLayout.NORTH);
 		f.add(eastPanel, BorderLayout.EAST);
-		f.setSize(1100,1000);  
+		f.setSize(1050,950);  
         f.setVisible(true);
         f.setLocation(100, 100);
 		f.requestFocus();
@@ -109,7 +110,11 @@ public class Scrabble {
 		play.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ai.makeSubsequentMove();
+				if (HumanMove.isValid()){
+					System.out.println( HumanMove.getInstance().toString());
+					ai.makeSubsequentMove();
+				}
+
 			}
 		});
 		pass.addActionListener(new ActionListener() {

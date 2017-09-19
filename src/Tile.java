@@ -1,11 +1,9 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class Tile {
+public class Tile {	
 	char letter;
 	int points;
 	JButton icon;
@@ -18,10 +16,20 @@ public class Tile {
 		this.points = points;
 		//this.me = this;
 		//build Tile Icon
-		icon = new JButton("" + letter);
-		icon.setBackground(Color.yellow);
-		icon.setFont(new Font("calibri", 1, 21));
-
+					
+		ImageIcon picture = new ImageIcon("tilepics/" + letter +".jpg");
+		java.awt.Image TileImage = picture.getImage();
+		java.awt.Image scaledImage = TileImage.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+			//icon.setIcon(new ImageIcon(scaledImage));
+		//}
+		icon = new JButton("", new ImageIcon(scaledImage)); 
+		//icon.setBackground(Color.yellow);
+		//icon.setFont(new Font("calibri", 1, 21));
+		icon.setPreferredSize(new Dimension(50, 50));
+		
+		//icon.setText("");
+		
+		//if (letter == 'A'){
 
 	}
 	

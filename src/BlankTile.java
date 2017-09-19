@@ -6,10 +6,12 @@ import javax.swing.JButton;
 
 public class BlankTile extends Tile {
 
+	boolean empty;
+	
 	public BlankTile() {
 		super(' ', 0);
 		super.icon.setBackground(new Color(0, 120, 0));
-	
+		empty = true;
 	}
 	
 	public BlankTile(int row, int col){
@@ -19,13 +21,17 @@ public class BlankTile extends Tile {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (Scrabble.blueTile != null){
-					System.err.println(row + " " + col + " " + Scrabble.blueTile.getText() );
-					icon.setText(Scrabble.blueTile.getText());
+				if (Scrabble.blueTile != null && empty){
+					System.err.println(row + " " + col + " " + Scrabble.blueTile.icon.getText() );
+					icon.setText(Scrabble.blueTile.icon.getText());
 					icon.setBackground(Color.ORANGE);
-					Scrabble.user.letterRack.tilePanel.remove(Scrabble.blueTile); //remove(Scrabble.blueTile);
+					icon.setIcon(Scrabble.blueTile.icon.getIcon());
+					Scrabble.user.letterRack.tilePanel.remove(Scrabble.blueTile.icon); //remove(Scrabble.blueTile);
 					Scrabble.user.redrawRack();
+					HumanMove.getInstance().add(new HumanAction(Scrabble.blueTile, row, col));
 					Scrabble.blueTile = null;
+					empty = false;
+					
 				}
 			}
 		});

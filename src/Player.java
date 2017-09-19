@@ -15,6 +15,7 @@ public class Player {
 	int Score;
 	JPanel display;
 	JLabel scoreLabel;
+
 	
 	public Player(String name, boolean isAI) {
 		super();
@@ -37,6 +38,7 @@ public class Player {
 		display.add(scoreLabel, BorderLayout.EAST);
 		
 		if (!isAI){
+			
 			for ( Tile tile : letterRack.tiles){
 				Scrabble.PlayerTiles.add(tile);
 				tile.icon.setBackground(Color.ORANGE);
@@ -45,15 +47,14 @@ public class Player {
 					public void actionPerformed(ActionEvent e) {
 						if (tile.letter != ' '){
 							if (Scrabble.blueTile != null){
-								Scrabble.blueTile.setBackground(Color.ORANGE);
+								Scrabble.blueTile.icon.setBackground(Color.ORANGE);
 							}	
 							tile.icon.setBackground(Color.CYAN);
-							Scrabble.blueTile = tile.icon;
+							Scrabble.blueTile = tile;
 						}
 					}
 				});
 			}
-			
 		}
 		
 	}

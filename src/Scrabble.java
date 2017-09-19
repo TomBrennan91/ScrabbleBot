@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +26,9 @@ public class Scrabble {
 	static Player user;
 	static Player bot;
 	static JButton blueTile;
+
+	
+	static ArrayList<Tile> PlayerTiles;
 	
 	public static void main(String[] args) {
 		
@@ -36,6 +40,7 @@ public class Scrabble {
 	
 	static void buildUI(){
 		JPanel eastPanel = drawEastPanel();
+		PlayerTiles = new ArrayList<Tile>();
 		user = new Player("Josef", false);
 		bot = new Player("ScrabbleBot", true);
 		
@@ -51,11 +56,14 @@ public class Scrabble {
 
 		new Dictionary();
 		ai = new AI(bot);
-		ai.makeFirstMove(bot.letterRack.tiles);
+		
+		ai.makeFirstMove();
 
 		for (Anchor anchor : ai.findAnchors()){
 			System.out.println(anchor.toString());
 		}
+		
+		System.err.println(PlayerTiles.toString());
 		
 //		boolean aiHasMoved = true;
 //		while (aiHasMoved){

@@ -1,5 +1,8 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.	swing.JLabel;
 import javax.swing.JPanel;
@@ -32,6 +35,27 @@ public class Player {
 		scoreLabel = new JLabel("Score: " + Score);
 		scoreLabel.setFont(new Font("Calibri", 1, 30));
 		display.add(scoreLabel, BorderLayout.EAST);
+		
+		if (!isAI){
+			for ( Tile tile : letterRack.tiles){
+				Scrabble.PlayerTiles.add(tile);
+				tile.icon.setBackground(Color.ORANGE);
+				tile.icon.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (tile.letter != ' '){
+							if (Scrabble.blueTile != null){
+								Scrabble.blueTile.setBackground(Color.ORANGE);
+							}	
+							tile.icon.setBackground(Color.CYAN);
+							Scrabble.blueTile = tile.icon;
+						}
+					}
+				});
+			}
+			
+		}
+		
 	}
 	
 	void awardPoints(int points){

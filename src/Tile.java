@@ -21,24 +21,7 @@ public class Tile {
 		icon = new JButton("" + letter);
 		icon.setBackground(Color.yellow);
 		icon.setFont(new Font("calibri", 1, 21));
-		icon.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (letter != ' '){
-					if (Scrabble.blueTile != null){
-						
-						Scrabble.blueTile.setBackground(Color.YELLOW);
-						
-					}	
-					icon.setBackground(Color.CYAN);
-					
-					Scrabble.blueTile = icon;
-						
-						
-				}
-			}
-		});
+
 
 	}
 	

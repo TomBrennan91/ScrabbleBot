@@ -10,9 +10,9 @@ public class AI implements Constants {
 		this.bot = bot;
 	}
 
-	void makeFirstMove(ArrayList<Tile> tiles){
+	void makeFirstMove(){
 		bestWord = new ArrayList<Tile>();
-		getStartingWord( tiles, bestWord, "", 0);
+		getStartingWord( bot.letterRack.tiles , bestWord, "", 0);
 		Move move = new Move(bestWord , 7 , 7 - (bestWord.size() / 2) , true , maxScore , bot);
 		move.execute(Board.getInstance().tileArr);
 		//System.out.println(move.toString());
@@ -62,7 +62,7 @@ public class AI implements Constants {
 	}
 	
 	private boolean fitsOnBoard(Anchor anchor, ArrayList<Tile> word){
-	//check if word would cause spilling off the edge of the board
+		//check if word would cause spilling off the edge of the board
 		int anchorPos = getAnchorPosition(anchor, word);
 		int prefixLength = anchorPos;
 		int posfixLength = word.size() - anchorPos - 1 ;
@@ -97,7 +97,6 @@ public class AI implements Constants {
 						if (fitsOnBoard(anchor, tilesInWord)){
 							if (maxScore < score + curTile.points){
 								maxScore =  score + curTile.points;
-								//System.out.println(currentWord + curTile.letter + " is word" + "[" + (score + curTile.points) + "]");
 								bestWord = tilesInWord;
 								currentAnchor = anchor;
 							}	
@@ -128,7 +127,6 @@ public class AI implements Constants {
 				if (Dictionary.trie.searchWord(currentWord + curTile.letter)){
 					if (maxScore < score + curTile.points){
 						maxScore =  score + curTile.points;
-						//System.out.println(currentWord + curTile.letter + " is word" + "[" + (score + curTile.points) + "]");
 						bestWord = tilesInWord;
 					}	
 				}

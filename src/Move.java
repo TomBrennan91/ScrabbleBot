@@ -10,6 +10,7 @@ public class Move {
 		this.score = score;
 		this.player = player;
 		this.anchor = null;
+		
 		//TODO: try to remember how to chain constructors
 	}
 	

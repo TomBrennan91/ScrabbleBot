@@ -20,18 +20,15 @@ public class BlankTile extends Tile {
 		icon.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if (Scrabble.blueTile != null && empty){
-					System.err.println(row + " " + col + " " + Scrabble.blueTile.icon.getText() );
+					Scrabble.user.letterRack.tilePanel.remove(Scrabble.blueTile.icon);
 					icon.setText(Scrabble.blueTile.icon.getText());
-					icon.setBackground(Color.ORANGE);
+					Scrabble.blueTile.setRed();
 					icon.setIcon(Scrabble.blueTile.icon.getIcon());
-					Scrabble.user.letterRack.tilePanel.remove(Scrabble.blueTile.icon); //remove(Scrabble.blueTile);
 					Scrabble.user.redrawRack();
 					HumanMove.getInstance().add(new HumanAction(Scrabble.blueTile, row, col));
 					Scrabble.blueTile = null;
 					empty = false;
-					
 				}
 			}
 		});

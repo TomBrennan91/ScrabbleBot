@@ -38,7 +38,6 @@ public class Player {
 		display.add(scoreLabel, BorderLayout.EAST);
 		
 		if (!isAI){
-			
 			for ( Tile tile : letterRack.tiles){
 				Scrabble.PlayerTiles.add(tile);
 				tile.icon.setBackground(Color.ORANGE);
@@ -47,9 +46,11 @@ public class Player {
 					public void actionPerformed(ActionEvent e) {
 						if (tile.letter != ' '){
 							if (Scrabble.blueTile != null){
-								Scrabble.blueTile.icon.setBackground(Color.ORANGE);
+								//Scrabble.blueTile.icon.setBackground(Color.ORANGE);
+								Scrabble.blueTile.setNormal();
 							}	
-							tile.icon.setBackground(Color.CYAN);
+							//tile.icon.setBackground(Color.CYAN);
+							tile.setBlue();
 							Scrabble.blueTile = tile;
 						}
 					}
@@ -68,10 +69,31 @@ public class Player {
 		letterRack.refill();
 		display.add(letterRack.tilePanel, BorderLayout.CENTER);
 		//System.out.println("bot now has letters: " + letterRack.tiles.toString());
+		if (!isAI){
+			for ( Tile tile : letterRack.tiles){
+				Scrabble.PlayerTiles.add(tile);
+				tile.icon.setBackground(Color.ORANGE);
+				tile.icon.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (tile.letter != ' '){
+							if (Scrabble.blueTile != null){
+								//Scrabble.blueTile.icon.setBackground(Color.ORANGE);
+								Scrabble.blueTile.setNormal();
+							}	
+							//tile.icon.setBackground(Color.CYAN);
+							tile.setBlue();
+							Scrabble.blueTile = tile;
+						}
+					}
+				});
+			}
+		}
 	}
 	
 	void redrawRack(){
 		display.remove(letterRack.tilePanel);
+		//letterRack.redrawTiles();
 		display.add(letterRack.tilePanel, BorderLayout.CENTER);
 		display.repaint();
 	}

@@ -22,7 +22,7 @@ public class LetterRack implements Constants{
 		redrawTiles();
 	}
 	
-	private void redrawTiles(){
+	public void redrawTiles(){
 		tilePanel.removeAll();
 		GridBagConstraints gbc = new GridBagConstraints();
 		for (int i = 0 ; i < TILES_IN_RACK ; i++){
@@ -50,7 +50,7 @@ public class LetterRack implements Constants{
 		while (tiles.size() < TILES_IN_RACK){
 			tiles.add(TileBag.getInstance().takeOutTile());
 		}
-		System.out.println("bot has tiles:" + tiles.toString());
+		//System.out.println("bot has tiles:" + tiles.toString());
 		drawTileRack();
 	}
 	

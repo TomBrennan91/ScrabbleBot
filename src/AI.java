@@ -72,7 +72,6 @@ public class AI implements Constants {
 		} else {
 			return false;
 		}
-			
 	}
 	
 	private void  findHighestScoringWord(ArrayList<Tile> inputTiles, ArrayList<Tile> tilesToBeUsed, String currentWord, int score, Anchor anchor){

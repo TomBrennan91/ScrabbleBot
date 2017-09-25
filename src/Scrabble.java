@@ -54,17 +54,23 @@ public class Scrabble {
 
 	private static void beginGame() {
 		bot.letterRack.refill();
-
+		
+		
 		new Dictionary();
 		ai = new AI(bot);
 		
-		ai.makeFirstMove();
-
-		for (Anchor anchor : ai.findAnchors()){
-			System.out.println(anchor.toString());
-		}
+		//JOptionPane.showMessageDialog(null, "Tiles must be all be in the same row or column");
 		
-		System.err.println(PlayerTiles.toString());
+		//ai.makeFirstMove();
+		
+		//Board.getInstance().print();
+		//Board.getInstance().reDraw();
+
+//		for (Anchor anchor : ai.findAnchors()){
+//			System.out.println(anchor.toString());
+//		}
+		
+		//System.err.println(PlayerTiles.toString());
 		
 //		boolean aiHasMoved = true;
 //		while (aiHasMoved){
@@ -105,22 +111,25 @@ public class Scrabble {
 		JButton play = new JButton("Play");
 		JButton pass = new JButton("Pass");
 		JButton swap = new JButton("Swap");
+		JButton cancel = new JButton("Cancel");
 		//JButton shuffle = new JButton("Shuffle");
 		
 		play.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (HumanMove.isValid()){
-					System.out.println( HumanMove.getInstance().toString());
+					//System.out.println( HumanMove.getInstance().toString());
+					HumanMove.execute();
+					Board.getInstance().print();
 					ai.makeSubsequentMove();
+					user.display.repaint();
 				}
-
 			}
 		});
 		pass.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				log.append(user.name + " passes this turn");
+				log.append(user.name + " passes this turn\n");
 				ai.makeSubsequentMove();
 			}
 		});
@@ -131,13 +140,19 @@ public class Scrabble {
 				ai.makeSubsequentMove();
 			}
 		});
-		
+		cancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				HumanMove.reverse();
+			}
+		});
 		
 		JPanel controls = new JPanel();
 		controls.setLayout(new GridLayout(3, 1));
 		controls.add(play);
 		controls.add(pass);
 		controls.add(swap);
+		controls.add(cancel);
 		//controls.add(shuffle, BorderLayout.SOUTH);
 		return controls;
 	}

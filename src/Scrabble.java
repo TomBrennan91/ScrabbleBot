@@ -45,7 +45,7 @@ public class Scrabble {
 		
 		drawMainFrame(bot, f, board, eastPanel);
 		
-		board.repaint();
+		
 		
 	}
 
@@ -116,7 +116,7 @@ public class Scrabble {
 					HumanMove.execute();
 					Board.getInstance().print();
 					ai.makeSubsequentMove();
-					user.display.repaint();
+					
 				}
 			}
 		});
@@ -145,7 +145,7 @@ public class Scrabble {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Scrabble.user.letterRack.ShuffleTiles();
-				Board.getInstance().repaint();
+				
 			}
 		});
 		

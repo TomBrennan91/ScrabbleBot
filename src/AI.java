@@ -147,7 +147,7 @@ public class AI implements Constants {
 					int endCol = col;
 					
 					//check how far left the word can go without collisions
-					if (col > 0 && tileArr[row][col - 1].letter == ' '){
+					if (col > 0 && tileArr[row][col - 1].letter < 53){
 						while (startCol > 0){
 							if (row != BOARD_DIMENSIONS - 1 && tileArr[row + 1][startCol - 1].letter != ' '){
 								break;

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +24,8 @@ public class Scrabble {
 	static Player user;
 	static Player bot;
 	static Tile blueTile;
-	//static ArrayList<Tile> PlayerTiles;
+	static ArrayList<String> wordList;
+	
 	
 	public static void main(String[] args) {
 		
@@ -45,16 +47,19 @@ public class Scrabble {
 		
 		drawMainFrame(bot, f, board, eastPanel);
 		
-		
-		
 	}
-
+	
 	private static void beginGame() {
-		//bot.letterRack.refill();
 
 		new Dictionary();
 		ai = new AI(bot);
 		ai.makeFirstMove();
+		
+		//Board.getInstance().print();
+		
+		wordList = WordsOnBoard.getWordList();
+		
+		wordList.forEach(System.out::println);
 		
 		//Board.getInstance().print();
 		//Board.getInstance().reDraw();
@@ -114,9 +119,14 @@ public class Scrabble {
 				if (HumanMove.isValid()){
 					//System.out.println( HumanMove.getInstance().toString());
 					HumanMove.execute();
-					Board.getInstance().print();
+					
+					ArrayList<String> newWords = WordsOnBoard.getNewWords();
+					
 					ai.makeSubsequentMove();
 					
+					
+					newWords.forEach(System.out::println);
+					wordList = WordsOnBoard.getWordList();
 				}
 			}
 		});

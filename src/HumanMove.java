@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
@@ -74,149 +73,49 @@ public class HumanMove implements Constants{
 	}
 	
 	private static boolean hasGaps(){
-		if (getWord() == null){
-			JOptionPane.showMessageDialog(null, "Words must not have gaps");
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	
-	
-	
-	
-	static HumanWord getWord(){
-		sortActions();
-		int row = actionList.get(0).row;
-		int col = actionList.get(0).col ;
-		int score = 0;
-		StringBuilder word = new StringBuilder();
-		Iterator<HumanAction> iterator = actionList.iterator();
-		HumanAction cur = iterator.next();
-		word.append(cur.movedTile.letter);
-		score += cur.movedTile.points;
-		System.out.println("placed " +cur.movedTile.letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-		if (isRow()){
-			col++;
-		} else{
-			row++;
-		}
-		if (iterator.hasNext()) {
 		
-			cur = iterator.next();
-			
-			while (iterator.hasNext()){
-				
-				if (isRow()){
-					if (cur.col == col){
-						System.out.println("placed " +cur.movedTile.letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-						word.append(cur.movedTile.letter);
-						score += cur.movedTile.points;
-						cur = iterator.next();
-						col++;
-					} else {
-						if(Board.getInstance().tileArr[row][col].letter != ' '){
-							System.out.println("on board " + Board.getInstance().tileArr[row][col].letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-							word.append(Board.getInstance().tileArr[row][col].letter);
-							score+= Board.getInstance().tileArr[row][col].points;
-							col++;
-						} else {
-							System.out.println("fail " +cur.movedTile.letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-							return null;
-						}
-					}
-				} else if (isCol()){
-					if (cur.row == row){
-						System.out.println("placed " +cur.movedTile.letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-						word.append(cur.movedTile.letter);
-						score += cur.movedTile.points;
-						cur = iterator.next();
-						row++;
-					} else {
-						if(Board.getInstance().tileArr[row][col].letter != ' '){
-							System.out.println("on board " + Board.getInstance().tileArr[row][col].letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-							word.append(Board.getInstance().tileArr[row][col].letter);
-							score+= Board.getInstance().tileArr[row][col].points;
-							row++;
-						} else {
-							System.out.println("fail " +cur.movedTile.letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-							return null;
-						}
-					}
-				} else {
-					System.err.println("i dont know how this happened");
-					return null;
+		if (actionList.size() <= 1) return false;
+		
+		sortActions();
+
+		if (isRow()){
+			int col = actionList.get(0).col;
+			for (int row = actionList.get(0).row ; row <= actionList.get(actionList.size() - 1).row ; row++){
+				if (Board.getInstance().tileArr[col][row].letter == ' '){
+					JOptionPane.showMessageDialog(null, "Words must not have gaps");
+					return true;
 				}
 			}
-			System.out.println("placed " + cur.movedTile.letter + ", col:" + col + "," + cur.col + " row:" + row + "," + cur.row);
-			word.append(cur.movedTile.letter);
-			score += cur.movedTile.points;
+		} else if (isCol()){
+			int row = actionList.get(0).row;
+			for (int col = actionList.get(0).col ; col <= actionList.get(actionList.size() - 1).col ; col++){
+				if (Board.getInstance().tileArr[col][row].letter == ' '){
+					JOptionPane.showMessageDialog(null, "Words must not have gaps");
+					return true;
+				}
+			}
 		}
-		
-		//get trailing letters
-		while(true){
-			if (isRow()){
-				col++;
-			} else {
-				row++;
-			}
-			if (row >= BOARD_DIMENSIONS || col >= BOARD_DIMENSIONS|| Board.getInstance().tileArr[row][col].letter == ' '){
-				break;
-			}
-			word.append(Board.getInstance().tileArr[row][col].letter);
-			score += Board.getInstance().tileArr[row][col].points;
-		}
-		
-		
-		//get leading letters
-		row = actionList.get(0).row;
-		col = actionList.get(0).col ;
-		while(true){
-			if (isRow()){
-				col--;
-			} else {
-				row--;
-			}
-			if (row <= 0 || col <= 0 || Board.getInstance().tileArr[row][col].letter == ' '){
-				break;
-			}
-			word.insert(0,Board.getInstance().tileArr[row][col].letter);
-			score += Board.getInstance().tileArr[row][col].points;
-		}
-		
-		HumanWord humanWord = new HumanWord(score, word.toString());
-		
-		return humanWord;
-	}
-	
-	
+		return false;
+	}	
 	
 	public static void execute(){
 		for (HumanAction action : actionList){
-			//action.movedTile.setNormal();
-			//action.movedTile.icon.repaint();
-			Board.getInstance().tileArr[action.row][action.col].letter = action.movedTile.letter;
-			Board.getInstance().tileArr[action.row][action.col].points = action.movedTile.points;
-			Scrabble.user.letterRack.tiles.remove(action.movedTile);
+			action.movedTile.setNormal();
 		}
+		
+		
 		actionList = new ArrayList<HumanAction>();
-		//Board.getInstance().reDraw();
-		//Scrabble.user.getMoreTiles();
 		Scrabble.user.letterRack.refill();
-		//Scrabble.user.letterRack.redrawTiles();
-		Board.getInstance().repaint();
 	}
 	
 	public static void reverse(){
+		
 		for (HumanAction action : actionList){
 			action.movedTile.setNormal();
 			Scrabble.user.letterRack.tiles.add(action.movedTile);
-			//Board.getInstance().tileArr[action.row][action.col].icon.setIcon(null);
-			//Board.getInstance().tileArr[action.row][action.col] = new BlankTile(action.row, action.col);
-			//Scrabble.user.letterRack.redrawTiles();
-			//Scrabble.user.redrawRack();
+			Board.getInstance().tileArr[action.col][action.row] = new Tile(' ', 0);
 		}
+		actionList = new ArrayList<HumanAction>();
 	}
 }
 

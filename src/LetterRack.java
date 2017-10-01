@@ -27,14 +27,15 @@ public class LetterRack implements Constants{
 	}
 	
 	public void SwapTiles(){
-		for (int i = 0 ; i < TILES_IN_RACK ; i++){
-			Tile tile =tiles.get(0) ; 
+		for (int i = 0 ; i < tiles.size() ; i++){
+			Tile tile =tiles.get(i) ; 
 			if (tile != null){
 				TileBag.getInstance().TileSet.add(tile);
 				//tilePanel.remove(tiles.get(0).icon);
 			}
-			tiles.remove(0);
 		}
+		tiles.clear();
+		
 		refill();
 		//readTiles();	
 	}

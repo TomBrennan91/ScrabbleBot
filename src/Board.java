@@ -42,15 +42,12 @@ public class Board extends Canvas implements Constants, Runnable{
 		
 		//fill board with blank buttons
 		for (int row = 0 ; row < tileArr.length ; row ++){
-			for (int col = 0 ; col < tileArr[0].length ; col ++){
-				//Tile blank = new BlankTile(row,col);
-				//canvas.
-				
+			for (int col = 0 ; col < tileArr[0].length ; col ++){			
 				tileArr[row][col] = new Tile(' ', 0);
 			}
 		}
 
-		addBonusTiles();
+		//addBonusTiles();
 		addMouseListener(new MouseListener() {
 			
 			@Override
@@ -63,13 +60,14 @@ public class Board extends Canvas implements Constants, Runnable{
 	        		int col = me.getY()/50;
 	        		System.out.print("[" + row + "," + col + "] ");
 	        		//cellPool[me.getX()/10][me.getY()/10].click();
-	        		if (tileArr[col][row].letter == ' ' || tileArr[col][row].letter >= '0' && tileArr[col][row].letter <= '4' ){
+	        		if (tileArr[col][row].letter < 53){//tileArr[col][row].letter == ' ' || tileArr[col][row].letter >= '0' && tileArr[col][row].letter <= '4' ){
 	        			System.out.println("(blank)");
 	        			if (Scrabble.blueTile != null){
 	        				tileArr[col][row] = Scrabble.blueTile;
 	        				Scrabble.blueTile.setRed();
 	        				Scrabble.user.letterRack.tiles.remove(Scrabble.blueTile);
-	        				Scrabble.blueTile = null;	
+	        				HumanMove.getInstance().add(new HumanAction(Scrabble.blueTile, row, col));
+	        				Scrabble.blueTile = null;
 	        			}
 	        		} else {
 	        			System.out.println("'" + tileArr[col][row].letter + "'");
@@ -100,7 +98,6 @@ public class Board extends Canvas implements Constants, Runnable{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				repaint();
 			}
 		});
      
@@ -208,37 +205,11 @@ public class Board extends Canvas implements Constants, Runnable{
 		}
 	}
 
-//
-//	void reDraw(){
-//		for (int row = 0 ; row < tileArr.length ; row ++){
-//			for (int col = 0 ; col < tileArr[0].length ; col ++){
-//				boardCanvas.remove(0);
-//				boardCanvas.add(tileArr[row][col].icon);
-//			}
-//		}
-//	}
 	
     public void paint(Graphics g) {
     	if (dbImage!= null){
     		g.drawImage(dbImage, 0, 0, null);
     	}
-    	
-//    	super.paint(g);
-//		for (int row = 0 ; row < tileArr.length ; row ++){
-//			for (int col = 0 ; col < tileArr[0].length ; col ++){
-//				//g.fillRect(col * 50, row * 50, 48, 48);
-//				g.drawImage(tileArr[row][col].image , col * 50, row * 50, null);
-//				g.drawRect(col * 50, row * 50, 50, 50);
-//				//canvas.getGraphics().drawImage(tileArr[row][col].image , col*50, row*50, null);// (blank.icon);
-//			}
-//		}
-//		g.setColor(new Color(0,100,0));
-//		g.fillRect(0, 750, 750, 100);
-//		g.setColor(Color.BLACK);
-//		for (int i = 0 ; i < Scrabble.user.letterRack.tiles.size() ; i++ ){
-//			g.drawImage(Scrabble.user.letterRack.tiles.get(i).image, 200 + (i*50), 775, null);
-//			g.drawRect(200 + (i*50) , 775, 50, 50);
-//		}
     }
     
     private void paintScreen(){
@@ -250,8 +221,8 @@ public class Board extends Canvas implements Constants, Runnable{
     		}
     		g.dispose();
     	} catch (Exception e){
-    		System.err.println("Graphics context error " + e);
-    		e.printStackTrace();
+    		//System.err.println("Graphics context error " + e);
+    		//e.printStackTrace();
     	}
     }
     
@@ -259,7 +230,7 @@ public class Board extends Canvas implements Constants, Runnable{
     	if (dbImage == null){
     		dbImage = createImage(750, 900);
     		if (dbImage == null){
-    			System.err.println("dbImage is null");
+    			//System.err.println("dbImage is null");
     			return;
     		} else {
     			dbg = dbImage.getGraphics();
@@ -292,16 +263,11 @@ public class Board extends Canvas implements Constants, Runnable{
 	public void run() {
 		boolean running = true;
 		while(running){
-			
 			render();
-			//repaint();
 			paintScreen();
-			
 			try{
-				Thread.sleep(50);
+				Thread.sleep(20);
 			} catch (InterruptedException e){}
-			
-			
 		}
 		System.exit(0);
 	}

@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
-
 
 public class Scrabble {
 	
@@ -26,9 +23,7 @@ public class Scrabble {
 	static Player user;
 	static Player bot;
 	static Tile blueTile;
-
-	
-	static ArrayList<Tile> PlayerTiles;
+	//static ArrayList<Tile> PlayerTiles;
 	
 	public static void main(String[] args) {
 		
@@ -40,28 +35,26 @@ public class Scrabble {
 	
 	static void buildUI(){
 		JPanel eastPanel = drawEastPanel();
-		PlayerTiles = new ArrayList<Tile>();
+		//PlayerTiles = new ArrayList<Tile>();
 		
 		user = new Player("Josef", false);
 		bot = new Player("ScrabbleBot", true);
 		
 		JFrame f = new JFrame("Tom Brennan's ScrabbleBot");
 		Board board = Board.getInstance();
-
+		
 		drawMainFrame(bot, f, board, eastPanel);
+		
+		board.repaint();
 		
 	}
 
 	private static void beginGame() {
-		bot.letterRack.refill();
-		
-		
+		//bot.letterRack.refill();
+
 		new Dictionary();
 		ai = new AI(bot);
-		
-		//JOptionPane.showMessageDialog(null, "Tiles must be all be in the same row or column");
-		
-		//ai.makeFirstMove();
+		ai.makeFirstMove();
 		
 		//Board.getInstance().print();
 		//Board.getInstance().reDraw();
@@ -97,11 +90,12 @@ public class Scrabble {
 	private static void drawMainFrame(Player bot, JFrame f, Board board, JPanel eastPanel) {
 		f.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.add(board.boardCanvas, BorderLayout.CENTER);
+		//f.add(board.boardCanvas, BorderLayout.CENTER);
+		f.add(board, BorderLayout.CENTER);
 		f.add(user.display, BorderLayout.SOUTH);
 		f.add(bot.display, BorderLayout.NORTH);
 		f.add(eastPanel, BorderLayout.EAST);
-		f.setSize(1050,950);  
+		f.setSize(1025,985);  
         f.setVisible(true);
         f.setLocation(100, 100);
 		f.requestFocus();
@@ -112,7 +106,7 @@ public class Scrabble {
 		JButton pass = new JButton("Pass");
 		JButton swap = new JButton("Swap");
 		JButton cancel = new JButton("Cancel");
-		//JButton shuffle = new JButton("Shuffle");
+		JButton shuffle = new JButton("Shuffle");
 		
 		play.addActionListener(new ActionListener() {
 			@Override
@@ -147,13 +141,21 @@ public class Scrabble {
 			}
 		});
 		
+		shuffle.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Scrabble.user.letterRack.ShuffleTiles();
+				Board.getInstance().repaint();
+			}
+		});
+		
 		JPanel controls = new JPanel();
 		controls.setLayout(new GridLayout(3, 1));
 		controls.add(play);
 		controls.add(pass);
 		controls.add(swap);
 		controls.add(cancel);
-		//controls.add(shuffle, BorderLayout.SOUTH);
+		controls.add(shuffle);
 		return controls;
 	}
 }

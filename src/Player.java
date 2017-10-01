@@ -1,8 +1,5 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.	swing.JLabel;
 import javax.swing.JPanel;
@@ -27,7 +24,7 @@ public class Player {
 		display = new JPanel();
 		//display.setBackground(new Color(0, 120, 0));
 		display.setLayout(new BorderLayout());
-		display.add(letterRack.tilePanel, BorderLayout.CENTER);
+		//display.add(letterRack.tilePanel, BorderLayout.CENTER);
 		
 		JLabel nameLabel = new JLabel(name);
 		nameLabel.setFont(new Font("Calibri", 1, 30));
@@ -37,26 +34,26 @@ public class Player {
 		scoreLabel.setFont(new Font("Calibri", 1, 30));
 		display.add(scoreLabel, BorderLayout.EAST);
 		
-		if (!isAI){
-			for ( Tile tile : letterRack.tiles){
-				Scrabble.PlayerTiles.add(tile);
-				tile.icon.setBackground(Color.ORANGE);
-				tile.icon.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (tile.letter != ' '){
-							if (Scrabble.blueTile != null){
-								//Scrabble.blueTile.icon.setBackground(Color.ORANGE);
-								Scrabble.blueTile.setNormal();
-							}	
-							//tile.icon.setBackground(Color.CYAN);
-							tile.setBlue();
-							Scrabble.blueTile = tile;
-						}
-					}
-				});
-			}
-		}
+//		if (!isAI){
+//			for ( Tile tile : letterRack.tiles){
+//				Scrabble.PlayerTiles.add(tile);
+//				tile.icon.setBackground(Color.ORANGE);
+//				tile.icon.addActionListener(new ActionListener() {
+//					@Override
+//					public void actionPerformed(ActionEvent e) {
+//						if (tile.letter != ' '){
+//							if (Scrabble.blueTile != null){
+//								//Scrabble.blueTile.icon.setBackground(Color.ORANGE);
+//								Scrabble.blueTile.setNormal();
+//							}	
+//							//tile.icon.setBackground(Color.CYAN);
+//							tile.setBlue();
+//							Scrabble.blueTile = tile;
+//						}
+//					}
+//				});
+//			}
+//		}
 		
 	}
 	
@@ -65,44 +62,45 @@ public class Player {
 		scoreLabel.setText("Score: " + Score);
 	}
 	
-	void getMoreTiles(){
-		letterRack.refill();
-		display.add(letterRack.tilePanel, BorderLayout.CENTER);
+//	void getMoreTiles(){
+//		letterRack.refill();
+//		display.add(letterRack.tilePanel, BorderLayout.CENTER);
 		//System.out.println("bot now has letters: " + letterRack.tiles.toString());
-		if (!isAI){
-			for ( Tile tile : letterRack.tiles){
-				Scrabble.PlayerTiles.add(tile);
-				tile.icon.setBackground(Color.ORANGE);
-				tile.icon.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (tile.letter != ' '){
-							if (Scrabble.blueTile != null){
-								//Scrabble.blueTile.icon.setBackground(Color.ORANGE);
-								Scrabble.blueTile.setNormal();
-							}	
-							//tile.icon.setBackground(Color.CYAN);
-							tile.setBlue();
-							Scrabble.blueTile = tile;
-						}
-					}
-				});
-			}
-		}
-	}
+//		if (!isAI){
+//			for ( Tile tile : letterRack.tiles){
+//				Scrabble.PlayerTiles.add(tile);
+//				tile.icon.setBackground(Color.ORANGE);
+//				tile.icon.addActionListener(new ActionListener() {
+//					@Override
+//					public void actionPerformed(ActionEvent e) {
+//						if (tile.letter != ' '){
+//							if (Scrabble.blueTile != null){
+//								//Scrabble.blueTile.icon.setBackground(Color.ORANGE);
+//								Scrabble.blueTile.setNormal();
+//							}	
+//							//tile.icon.setBackground(Color.CYAN);
+//							tile.setBlue();
+//							Scrabble.blueTile = tile;
+//						}
+//					}
+//				});
+//			}
+//		}
+//	}
 	
-	void redrawRack(){
-		display.remove(letterRack.tilePanel);
-		//letterRack.redrawTiles();
-		display.add(letterRack.tilePanel, BorderLayout.CENTER);
-		display.repaint();
-	}
+//	void redrawRack(){
+//		display.remove(letterRack.tilePanel);
+//		//letterRack.redrawTiles();
+//		display.add(letterRack.tilePanel, BorderLayout.CENTER);
+//		display.repaint();
+//	}
 	
 	void swapTiles(){
 		letterRack.SwapTiles();
-		redrawRack();
+		//redrawRack();
 		Scrabble.log.append(name + " swaps tiles with the bag\n");
-		letterRack.tilePanel.repaint();
+		Board.getInstance().repaint();
+		//letterRack.tilePanel.repaint();
 	}
 	
 }

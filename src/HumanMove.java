@@ -194,26 +194,28 @@ public class HumanMove implements Constants{
 	
 	public static void execute(){
 		for (HumanAction action : actionList){
-			action.movedTile.setNormal();
-			action.movedTile.icon.repaint();
+			//action.movedTile.setNormal();
+			//action.movedTile.icon.repaint();
 			Board.getInstance().tileArr[action.row][action.col].letter = action.movedTile.letter;
 			Board.getInstance().tileArr[action.row][action.col].points = action.movedTile.points;
 			Scrabble.user.letterRack.tiles.remove(action.movedTile);
 		}
 		actionList = new ArrayList<HumanAction>();
-		Board.getInstance().reDraw();
-		Scrabble.user.getMoreTiles();
-		Scrabble.user.letterRack.redrawTiles();
+		//Board.getInstance().reDraw();
+		//Scrabble.user.getMoreTiles();
+		Scrabble.user.letterRack.refill();
+		//Scrabble.user.letterRack.redrawTiles();
+		Board.getInstance().repaint();
 	}
 	
 	public static void reverse(){
 		for (HumanAction action : actionList){
 			action.movedTile.setNormal();
 			Scrabble.user.letterRack.tiles.add(action.movedTile);
-			Board.getInstance().tileArr[action.row][action.col].icon.setIcon(null);
-			Board.getInstance().tileArr[action.row][action.col] = new BlankTile(action.row, action.col);
-			Scrabble.user.letterRack.redrawTiles();
-			Scrabble.user.redrawRack();
+			//Board.getInstance().tileArr[action.row][action.col].icon.setIcon(null);
+			//Board.getInstance().tileArr[action.row][action.col] = new BlankTile(action.row, action.col);
+			//Scrabble.user.letterRack.redrawTiles();
+			//Scrabble.user.redrawRack();
 		}
 	}
 }

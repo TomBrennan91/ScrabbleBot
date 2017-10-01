@@ -15,8 +15,10 @@ public class AI implements Constants {
 		getStartingWord( bot.letterRack.tiles , bestWord, "", 0);
 		Move move = new Move(bestWord , 7 , 7 - (bestWord.size() / 2) , true , maxScore , bot);
 		move.execute(Board.getInstance().tileArr);
+		
+		bot.letterRack.refill();
 		//System.out.println(move.toString());
-		Board.getInstance().reDraw();
+		//Board.getInstance().reDraw();
 		//Board.getInstance().print();
 	}
 	
@@ -46,7 +48,8 @@ public class AI implements Constants {
 			Move move = new Move(bestWord , startRow , startCol ,currentAnchor.across, maxScore , bot);
 			move.execute(Board.getInstance().tileArr);
 			//System.out.println(move.toString());
-			Board.getInstance().reDraw();
+			
+			Board.getInstance().repaint();
 		}
 		return true;
 	}

@@ -61,7 +61,7 @@ public class Move {
 		}
 		player.awardPoints(score);
 		
-		player.getMoreTiles();
+		player.letterRack.refill();
 		Scrabble.log.append(this.toString());
 		
 	}

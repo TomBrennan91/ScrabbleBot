@@ -4,18 +4,21 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class Dictionary {
-	static WordTrie trie;
+	static WordTrie smallTrie;
+	static WordTrie bigTrie;
 	static HashMap<Character, Integer> pointsPerLetter;
 	
 	public Dictionary() {
-		ReadWordList("wordlist.txt");
+		smallTrie = new WordTrie();
+		bigTrie = new WordTrie();
+		ReadWordList("wordlist.txt", smallTrie);
+		ReadWordList("longwordlist.txt", bigTrie);
 		setupLetterScores();
 	}
 	
-	public void ReadWordList(String fileName){
+	void ReadWordList(String fileName, WordTrie trie){
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(fileName));
-			trie = new WordTrie();
 			String word;
 			while ( (word  = br.readLine()) != null ){
 				trie.insertWord(word.toUpperCase());

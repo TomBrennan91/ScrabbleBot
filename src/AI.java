@@ -81,7 +81,7 @@ public class AI implements Constants {
 		for (int tileNo = 0 ; tileNo < inputTiles.size() ; tileNo++){
 			Tile curTile = inputTiles.get(tileNo);
 			if (curTile == null) break;
-			if (Dictionary.trie.searchPrefix(currentWord + curTile.letter)){
+			if (isValidPrefix(currentWord + curTile.letter)	){
 
 				ArrayList<Tile> remainingTiles = new ArrayList<Tile>( inputTiles);
 				ArrayList<Tile> tilesInWord = new ArrayList<Tile>(tilesToBeUsed);
@@ -95,7 +95,7 @@ public class AI implements Constants {
 				
 				//need to check if anchor is in the word before we propose it as an answer
 				if (tilesToBeUsed.contains(anchor.anchorTile) || curTile.equals(anchor.anchorTile)){
-					if (Dictionary.trie.searchWord(currentWord + curTile.letter)){
+					if (isValidWord(currentWord + curTile.letter)){
 						if (fitsOnBoard(anchor, tilesInWord)){
 							if (maxScore < score + curTile.points){
 								maxScore =  score + curTile.points;
@@ -109,12 +109,43 @@ public class AI implements Constants {
 		}
 	}
 	
+	boolean isValidPrefix(String prefix){
+		if (Scrabble.hardMode.isSelected()){
+			if (Dictionary.bigTrie.searchPrefix(prefix)){
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (Dictionary.smallTrie.searchPrefix(prefix)){
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	boolean isValidWord(String word){
+		if (Scrabble.hardMode.isSelected()){
+			if (Dictionary.bigTrie.searchWord(word)){
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (Dictionary.smallTrie.searchWord(word)){
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 	
 	void  getStartingWord(ArrayList<Tile> inputTiles, ArrayList<Tile> tilesToBeUsed, String currentWord, int score){
 		for (int tileNo = 0 ; tileNo < inputTiles.size() ; tileNo++){
 			Tile curTile = inputTiles.get(tileNo);
 			
-			if (Dictionary.trie.searchPrefix(currentWord + curTile.letter)){
+			if (isValidPrefix(currentWord + curTile.letter)){
 				
 				ArrayList<Tile> remainingTiles = new ArrayList<Tile>( inputTiles);
 				ArrayList<Tile> tilesInWord = new ArrayList<Tile>(tilesToBeUsed);
@@ -126,7 +157,7 @@ public class AI implements Constants {
 					score += 50;
 				}
 				
-				if (Dictionary.trie.searchWord(currentWord + curTile.letter)){
+				if (isValidWord(currentWord + curTile.letter)){
 					if (maxScore < score + curTile.points){
 						maxScore =  score + curTile.points;
 						bestWord = tilesInWord;

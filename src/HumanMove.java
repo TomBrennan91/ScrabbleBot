@@ -16,7 +16,7 @@ public class HumanMove implements Constants{
 	}
 	
 	public static boolean isValid(){
-		return hasMovedTiles() && (isRowOrCol()) && !hasGaps() && isJoinedUp();
+		return hasMovedTiles() && (isRowOrCol()) && !hasGaps() && isJoinedUp() && isProperWord();
 	}
 	
 	private static boolean isJoinedUp(){
@@ -31,6 +31,19 @@ public class HumanMove implements Constants{
 			JOptionPane.showMessageDialog(null, "Tiles must be joined up with existing tiles");
 			return false;
 		}
+	}
+	
+	private static boolean isProperWord(){
+		if (Scrabble.enforeDictionary.isSelected()){
+			ArrayList<String> newWords = WordsOnBoard.getNewWords();
+			for (String word: newWords){
+				if (!Dictionary.bigTrie.searchWord(word)){
+					JOptionPane.showMessageDialog(null, "The word '" + word + "' does not appear in ScrabbleBot's Dictionary. Please play a different word or deselect 'enfore dictionary'");
+					return false;
+				}
+			}
+		} 
+		return true;
 	}
 	
 	private static boolean hasMovedTiles(){
@@ -115,19 +128,24 @@ public class HumanMove implements Constants{
 		ArrayList<String> newWords = WordsOnBoard.getNewWords();
 		
 		for (String word : newWords){
-			int score = Dictionary.getWordScore(word);
-			Scrabble.log.append(Scrabble.user.name + " plays the word " + word + " for " + score + " points\n");
-			if (!Dictionary.trie.searchWord(word)){
+			
+			if (!Dictionary.bigTrie.searchWord(word)){
+				
 				Scrabble.log.append("ScrabbleBot raises her eyebrows at '" + word + "' !\n");
 			}
+			int score = Dictionary.getWordScore(word);
+			if (Scrabble.user.letterRack.tiles.size() == 0){
+				Scrabble.log.append("                     *** BINGO!! ***    \n");
+				score += 50;
+			}
+			Scrabble.log.append(Scrabble.user.name + " plays the word " + word + " for " + score + " points\n");
+			
 			Scrabble.user.awardPoints(score);
 		}
-		
 		
 		for (HumanAction action : actionList){
 			action.movedTile.setNormal();
 		}
-		
 		
 		actionList = new ArrayList<HumanAction>();
 		Scrabble.user.letterRack.refill();

@@ -116,6 +116,7 @@ public class Scrabble {
 		hardMode = new JCheckBox("Hard Mode");
 		enforeDictionary = new JCheckBox("Enforce Dictionary");
 		
+		
 		play.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -175,6 +176,8 @@ public class Scrabble {
 		JPanel four = new JPanel(new GridLayout(1, 2));
 		four.add(hardMode);
 		four.add(enforeDictionary);
+		enforeDictionary.setSelected(true);
+		
 		
 		controls.add(one);
 		controls.add(two);

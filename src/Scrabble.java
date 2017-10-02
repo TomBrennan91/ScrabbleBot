@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -131,17 +132,21 @@ public class Scrabble {
 		pass.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HumanMove.reverse();
-				log.append(user.name + " passes this turn\n");
-				ai.makeSubsequentMove();
+				if (JOptionPane.showConfirmDialog(null,"Are you sure you want to forfiet your turn?"  ) == JOptionPane.YES_OPTION){
+					HumanMove.reverse();
+					log.append(user.name + " passes this turn\n");
+					ai.makeSubsequentMove();
+				}
 			}
 		});
 		swap.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HumanMove.reverse();
-				user.swapTiles();
-				ai.makeSubsequentMove();
+				if (JOptionPane.showConfirmDialog(null,"Are you sure you want to forfiet your turn and swap your tiles with the bag?"  ) == JOptionPane.YES_OPTION){
+					HumanMove.reverse();
+					user.swapTiles();
+					ai.makeSubsequentMove();
+				}
 			}
 		});
 		cancel.addActionListener(new ActionListener() {

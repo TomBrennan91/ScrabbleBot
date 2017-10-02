@@ -38,8 +38,14 @@ public class HumanMove implements Constants{
 			ArrayList<String> newWords = WordsOnBoard.getNewWords();
 			for (String word: newWords){
 				if (!Dictionary.bigTrie.searchWord(word)){
-					JOptionPane.showMessageDialog(null, "The word '" + word + "' does not appear in ScrabbleBot's Dictionary. Please play a different word or deselect 'enfore dictionary'");
-					return false;
+					if (JOptionPane.showConfirmDialog(null,"The word '" + word + "' does not appear in ScrabbleBot's Dictionary. \n would you like to play it anyway?"  ) == JOptionPane.YES_OPTION){
+						
+					} else {
+						return false;
+					}
+					//JOptionPane.showOptionDialog(Board.getInstance(), message, title, optionType, messageType, icon, options, initialValue)//(null, "The word '" + word + "' does not appear in ScrabbleBot's Dictionary. Please play a different word or deselect 'enfore dictionary'");
+					
+					
 				}
 			}
 		} 

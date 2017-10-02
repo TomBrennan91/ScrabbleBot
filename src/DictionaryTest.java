@@ -1,5 +1,9 @@
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.junit.Test;
 
 public class DictionaryTest {
@@ -54,4 +58,22 @@ public class DictionaryTest {
 		new Dictionary();
 		assertTrue( Dictionary.smallTrie.searchWord("terse"));
 	}
+	
+	@Test 
+	public void test9(){
+		try{
+			BufferedReader br = new BufferedReader(new FileReader("wordlist.txt"));
+			String word;
+			while ( (word  = br.readLine()) != null ){
+				if (!Dictionary.bigTrie.searchWord(word)){
+					System.err.println(word);
+				}
+			}
+			br.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

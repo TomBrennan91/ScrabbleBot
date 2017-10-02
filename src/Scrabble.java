@@ -56,7 +56,11 @@ public class Scrabble {
 
 		new Dictionary();
 		ai = new AI(bot);
-		ai.makeFirstMove();
+		boolean moved;
+		do{
+			moved = ai.makeFirstMove();
+		} while (!moved);
+		
 		
 		//Board.getInstance().print();
 		

@@ -10,16 +10,24 @@ public class AI implements Constants {
 		this.bot = bot;
 	}
 
-	void makeFirstMove(){
+	boolean makeFirstMove(){
+		
 		bestWord = new ArrayList<Tile>();
 		getStartingWord( bot.letterRack.tiles , bestWord, "", 0);
+		
+		if (maxScore == 0){
+			System.err.println("ai couldnt move with starting tiles \n" + bot.letterRack.toString() );
+			bot.swapTiles();
+			
+			return false;
+		}
+		
 		Move move = new Move(bestWord , 7 , 7 - (bestWord.size() / 2) , true , maxScore , bot);
 		move.execute(Board.getInstance().tileArr);
 		
 		bot.letterRack.refill();
-		//System.out.println(move.toString());
-		//Board.getInstance().reDraw();
-		//Board.getInstance().print();
+		return true;
+		
 	}
 	
 	boolean makeSubsequentMove(){

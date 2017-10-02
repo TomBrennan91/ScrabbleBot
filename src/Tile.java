@@ -5,28 +5,16 @@ import javax.swing.ImageIcon;
 public class Tile {	
 	char letter;
 	int points;
-	//JButton icon;
-	//Image regular;
-	//ImageIcon green;
-	//Image blue;
-	//Image red;
+
 	Image image;
-	boolean redraw;
+
 	
 	public Tile(char letter, int points) {
 		super();
 		this.letter = letter;
 		this.points = points;
 
-		//regular = getImage("regular");
-		//red = getImage("red");
-		//blue = getImage("blue");
-		
-		//icon = new JButton("");
 		setNormal();
-		redraw = true;
-		//icon.setPreferredSize(new Dimension(50, 50));
-		
 	}
 	
 	Image getImage(String color){

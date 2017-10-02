@@ -1,8 +1,12 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class TileBag {
 	ArrayList<Tile> TileSet;
+	
+	
+	
 	
 	private static final TileBag instance;
 	static{
@@ -14,6 +18,8 @@ public class TileBag {
 	}
 	
 	TileBag(){
+
+		
 		TileSet = new ArrayList<Tile>();
 		AddMultipleTiles('A',1,9);
 		AddMultipleTiles('B',3,2);
@@ -42,6 +48,8 @@ public class TileBag {
 		AddMultipleTiles('Y',4,2);
 		AddMultipleTiles('Z',10,1);
 	}
+	
+	
 	
 	public Tile takeOutTile(){
 		if (isEmpty()) return null;

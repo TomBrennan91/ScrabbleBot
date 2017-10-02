@@ -66,7 +66,7 @@ public class Board extends Canvas implements Constants, Runnable{
 	        				tileArr[col][row] = Scrabble.blueTile;
 	        				Scrabble.blueTile.setRed();
 	        				Scrabble.user.letterRack.tiles.remove(Scrabble.blueTile);
-	        				HumanMove.getInstance().add(new HumanAction(Scrabble.blueTile, row, col));
+	        				HumanMove.getInstance().add(new HumanAction(Scrabble.blueTile, col, row));
 	        				Scrabble.blueTile = null;
 	        			}
 	        		} else {

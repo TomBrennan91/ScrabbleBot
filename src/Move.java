@@ -10,11 +10,8 @@ public class Move {
 		this.score = score;
 		this.player = player;
 		this.anchor = null;
-		
-		//TODO: try to remember how to chain constructors
 	}
-	
-	
+
 	public Move(ArrayList<Tile> tiles, int startRow, int startCol, boolean across, int score, Player player, Anchor anchor) {
 		
 		this.tiles = tiles;
@@ -45,8 +42,6 @@ public class Move {
 	
 	void execute(Tile[][] tileArr){
 		
-		System.out.println(toString());
-		
 		int row = startRow;
 		int col = startCol;
 		
@@ -59,12 +54,17 @@ public class Move {
 			}
 			player.letterRack.tiles.remove(tile);
 		}
-		player.awardPoints(score);
 		
-		player.letterRack.refill();
-		Scrabble.log.append(this.toString());
+		
+		//player.awardPoints(score);
+		HumanMove.execute(player);
+		
+		//System.out.println(toString());
+		//Scrabble.log.append(this.toString());
+		
+		
+		//player.letterRack.refill();
 		
 	}
-	
 	
 }

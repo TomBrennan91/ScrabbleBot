@@ -26,7 +26,7 @@ public class Scrabble {
 	static Player user;
 	static Player bot;
 	static Tile blueTile;
-	static ArrayList<String> wordList;
+	static ArrayList<PlayedWord> wordList;
 	static JCheckBox hardMode;
 	static JCheckBox enforeDictionary;
 	
@@ -56,6 +56,9 @@ public class Scrabble {
 
 		new Dictionary();
 		ai = new AI(bot);
+		
+		wordList = new ArrayList<>();
+		
 		boolean moved;
 		do{
 			moved = ai.makeFirstMove();
@@ -127,7 +130,8 @@ public class Scrabble {
 			public void actionPerformed(ActionEvent e) {
 				if (HumanMove.isValid()){
 					//System.out.println( HumanMove.getInstance().toString());
-					HumanMove.execute();
+					HumanMove.execute(Scrabble.user);
+					wordList = WordsOnBoard.getWordList();
 					ai.makeSubsequentMove();
 					wordList = WordsOnBoard.getWordList();
 				}
@@ -140,6 +144,7 @@ public class Scrabble {
 					HumanMove.reverse();
 					log.append(user.name + " passes this turn\n");
 					ai.makeSubsequentMove();
+					wordList = WordsOnBoard.getWordList();
 				}
 			}
 		});
@@ -150,6 +155,7 @@ public class Scrabble {
 					HumanMove.reverse();
 					user.swapTiles();
 					ai.makeSubsequentMove();
+					wordList = WordsOnBoard.getWordList();
 				}
 			}
 		});

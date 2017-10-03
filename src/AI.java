@@ -12,7 +12,7 @@ public class AI implements Constants {
 
 	boolean makeFirstMove(){
 		
-		bestWord = new ArrayList<Tile>();
+		bestWord = new ArrayList<>();
 		getStartingWord( bot.letterRack.tiles , bestWord, "", 0);
 		
 		if (maxScore == 0){
@@ -100,6 +100,8 @@ public class AI implements Constants {
 				if (currentWord.length() >= 7){
 					score += 50;
 				}
+				
+				
 				
 				//need to check if anchor is in the word before we propose it as an answer
 				if (tilesToBeUsed.contains(anchor.anchorTile) || curTile.equals(anchor.anchorTile)){

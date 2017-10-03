@@ -20,9 +20,9 @@ public class HumanMove implements Constants{
 	}
 	
 	private static boolean isJoinedUp(){
-		ArrayList<String> newWords = WordsOnBoard.getNewWords();
+		ArrayList<PlayedWord> newWords = WordsOnBoard.getNewWords();
 		int letterCount  = 0;
-		for(String word: newWords) letterCount += word.length();
+		for(PlayedWord word: newWords) letterCount += word.word.length();
 		
 		//System.err.println(letterCount + );
 		if (letterCount > actionList.size()){
@@ -35,17 +35,15 @@ public class HumanMove implements Constants{
 	
 	private static boolean isProperWord(){
 		if (Scrabble.enforeDictionary.isSelected()){
-			ArrayList<String> newWords = WordsOnBoard.getNewWords();
-			for (String word: newWords){
-				if (!Dictionary.bigTrie.searchWord(word)){
-					if (JOptionPane.showConfirmDialog(null,"The word '" + word + "' does not appear in ScrabbleBot's Dictionary. \n would you like to play it anyway?"  ) == JOptionPane.YES_OPTION){
+			ArrayList<PlayedWord> newWords = WordsOnBoard.getNewWords();
+			for (PlayedWord word: newWords){
+				if (!Dictionary.bigTrie.searchWord(word.word)){
+					if (JOptionPane.showConfirmDialog(null,"The word '" + word.word + "' does not appear in ScrabbleBot's Dictionary. \n would you like to play it anyway?"  ) == JOptionPane.YES_OPTION){
 						
 					} else {
 						return false;
 					}
 					//JOptionPane.showOptionDialog(Board.getInstance(), message, title, optionType, messageType, icon, options, initialValue)//(null, "The word '" + word + "' does not appear in ScrabbleBot's Dictionary. Please play a different word or deselect 'enfore dictionary'");
-					
-					
 				}
 			}
 		} 
@@ -129,32 +127,35 @@ public class HumanMove implements Constants{
 		return false;
 	}	
 	
-	public static void execute(){
+	public static void execute(Player player){
 		
-		ArrayList<String> newWords = WordsOnBoard.getNewWords();
+		ArrayList<PlayedWord> newWords = WordsOnBoard.getNewWords();
 		
-		for (String word : newWords){
+		for (PlayedWord word : newWords){
 			
-			if (!Dictionary.bigTrie.searchWord(word)){
-				
-				Scrabble.log.append("ScrabbleBot raises her eyebrows at '" + word + "' !\n");
+			if (!Dictionary.bigTrie.searchWord(word.word)){
+				Scrabble.log.append("??? '" + word.word + "' ??? !\n");
 			}
-			int score = Dictionary.getWordScore(word);
-			if (Scrabble.user.letterRack.tiles.size() == 0){
-				Scrabble.log.append("                     *** BINGO!! ***    \n");
-				score += 50;
-			}
-			Scrabble.log.append(Scrabble.user.name + " plays the word " + word + " for " + score + " points\n");
 			
-			Scrabble.user.awardPoints(score);
+			int score = word.score;//Dictionary.getWordScore(word.);
+			
+			Scrabble.log.append(player.name + " plays the word " + word.word + " for " + score + " points\n");
+			
+			player.awardPoints(score);
+		}
+		if (player.letterRack.tiles.size() == 0){
+			Scrabble.log.append("***" + player.name + " scores a BINGO for 50 points! ***    \n");
+			player.awardPoints(50);
 		}
 		
-		for (HumanAction action : actionList){
-			action.movedTile.setNormal();
+		if (!player.name.equalsIgnoreCase("scrabblebot")){
+			for (HumanAction action : actionList){
+				action.movedTile.setNormal();
+			}
+			actionList = new ArrayList<HumanAction>();
 		}
-		
-		actionList = new ArrayList<HumanAction>();
-		Scrabble.user.letterRack.refill();
+		BonusChecker.RemovePlayedBonuses();
+		player.letterRack.refill();
 	}
 	
 	public static void reverse(){

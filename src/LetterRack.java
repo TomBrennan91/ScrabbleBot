@@ -21,7 +21,11 @@ public class LetterRack implements Constants{
 	
 	public void refill(){
 		while (tiles.size() < TILES_IN_RACK){
-			tiles.add(TileBag.getInstance().takeOutTile());
+			Tile newTile = TileBag.getInstance().takeOutTile();
+			if (newTile == null){
+				return;
+			}
+			tiles.add(newTile);
 		}
 		//System.out.println("bot has tiles:" + tiles.toString());
 	}

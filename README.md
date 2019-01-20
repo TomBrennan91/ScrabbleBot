@@ -1,1 +1,2 @@
 # ScrabbleBot
+![screenshot](scrabblescreenshot.PNG)

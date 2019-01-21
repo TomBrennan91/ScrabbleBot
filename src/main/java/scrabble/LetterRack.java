@@ -12,7 +12,6 @@ public class LetterRack implements Constants{
 		refill();
 	}
 
-	
 	public void readTiles(){
 		for (Tile tile : tiles ){
 			if (tile != null){
@@ -45,10 +44,8 @@ public class LetterRack implements Constants{
 		refill();
 		//readTiles();	
 	}
-	
-	
+
 	public void ShuffleTiles(){
 		Collections.shuffle(tiles);
 	}
-	
 }

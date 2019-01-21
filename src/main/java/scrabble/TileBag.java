@@ -47,8 +47,6 @@ public class TileBag {
 		AddMultipleTiles('Z',10,1);
 	}
 	
-	
-	
 	public Tile takeOutTile(){
 		if (isEmpty()) return null;
 		Random rnd = new Random();

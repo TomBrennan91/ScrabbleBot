@@ -1,3 +1,9 @@
+package scrabble;
+
+import scrabble.Constants;
+import scrabble.Scrabble;
+import scrabble.Tile;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -48,8 +54,7 @@ public class Board extends Canvas implements Constants, Runnable{
 		}
 
 		addMouseListener(new MouseListener() {
-			
-			@Override
+
 			public void mouseReleased(MouseEvent me) {
 				if  (me.getX()> 750 || me.getY() > 750){ 
         			return;
@@ -74,23 +79,23 @@ public class Board extends Canvas implements Constants, Runnable{
         		}
 			}
 			
-			@Override
+
 			public void mousePressed(MouseEvent me) {
 				if (me.getX()> 200 && me.getY() > 775 && me.getX() < 550 && me.getY() < 825) {
         			clickPlayerTiles((me.getX()/50) - 4);
         		}
 			}
 			
-			@Override
+
 			public void mouseExited(MouseEvent e) {
 			}
 			
-			@Override
+
 			public void mouseEntered(MouseEvent e) {
 				
 			}
 			
-			@Override
+
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
@@ -184,7 +189,6 @@ public class Board extends Canvas implements Constants, Runnable{
 		}
     }
 
-	@Override
 	public void run() {
 		boolean running = true;
 		while(running){

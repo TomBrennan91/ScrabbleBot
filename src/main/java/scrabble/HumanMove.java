@@ -1,10 +1,15 @@
+package scrabble;
+
+import scrabble.Constants;
+import scrabble.WordsOnBoard;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.JOptionPane;
 
-public class HumanMove implements Constants{
+public class HumanMove implements Constants {
 	
 	private static ArrayList<HumanAction> actionList;
 	static{
@@ -169,30 +174,6 @@ public class HumanMove implements Constants{
 	}
 }
 
-class HumanAction{
-	public HumanAction(Tile movedTile, int row, int col) {
-		this.movedTile = movedTile;
-		this.row = row;
-		this.col = col;
-	}
-	@Override
-	public String toString() {
-		return "HumanAction [movedTile=" + movedTile + ", row=" + row + ", col=" + col + "]";
-	}
-	
-	Tile movedTile;
-	int row;
-	int col;
-}
 
-class HumanWord{
-	public HumanWord(int score, String word) {
-		this.score = score;
-		this.word = word;
 
-	}
-
-	int score;
-	String word;
-}
 

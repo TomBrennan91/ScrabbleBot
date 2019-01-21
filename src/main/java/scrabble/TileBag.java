@@ -1,11 +1,10 @@
+package scrabble;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class TileBag {
 	ArrayList<Tile> TileSet;
-	
-	
-	
 	
 	private static final TileBag instance;
 	static{

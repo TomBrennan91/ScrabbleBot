@@ -1,5 +1,6 @@
-import static org.junit.Assert.assertTrue;
+package scrabble;
 
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class TileBagTest {
